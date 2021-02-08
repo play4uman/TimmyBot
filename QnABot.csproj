@@ -7,10 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="QnABot.deps.json" />
+    <Content Remove="QnABot.runtimeconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".deployment" />
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="build.cmd" />
+    <None Remove="deploy.cmd" />
+    <None Remove="Directory.Build.props" />
+    <None Remove="publish.cmd" />
+    <None Remove="QnABot.ruleset" />
+    <None Remove="QnABot.sln.metaproj.tmp" />
+    <None Remove="README.md" />
+    <None Remove="timmybot-web-src.zip" />
+    <None Remove="timmybot-web-Web-Deploy.pubxml" />
+    <None Remove="TimmyBotEmulatorConfig.bot" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.19" />
     <PackageReference Include="Microsoft.Bot.Builder.AI.QnA" Version="4.10.3" />
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.10.3" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.10.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
     <ItemGroup>
@@ -21,5 +43,8 @@
 
   <Import Project="PostDeployScripts\IncludeSources.targets" Condition="Exists('PostDeployScripts\IncludeSources.targets')" />
   <Import Project="..\PostDeployScripts\IncludeSources.targets" Condition="Exists('..\PostDeployScripts\IncludeSources.targets')" />
+  <ItemGroup>
+    <None Remove="QnABot.csproj" />
+  </ItemGroup>
 
 </Project>
