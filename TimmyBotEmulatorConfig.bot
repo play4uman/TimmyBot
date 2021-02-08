@@ -1,0 +1,18 @@
+{
+    "name": "TimmyBot",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "5170207f-e60b-41e7-8438-ad300dca8e92",
+            "appPassword": ">s]0;q}41Gb}dEM[.6QQ!Jhe",
+            "endpoint": "http://localhost:3978/api/messages",
+            "id": "0e26f530-69ea-11eb-9edb-dda202318135",
+            "name": "http://localhost:3978/api/messages"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "overrides": null,
+    "path": "D:\\Code\\timmybot-web-src\\TimmyBotEmulatorConfig.bot"
+}
