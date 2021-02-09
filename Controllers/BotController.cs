@@ -38,7 +38,7 @@ namespace Microsoft.BotBuilderSamples
             byte[] requestData = Encoding.UTF8.GetBytes(bodyText);
 
             dynamic bodyObj = JsonConvert.DeserializeObject(bodyText);
-            if (bodyObj.type == "message")
+            if ((string)bodyObj.type == "message")
             {
                 var result = await _questionInterceptor.InterceptQueryAsync((string)bodyObj.text);
             }

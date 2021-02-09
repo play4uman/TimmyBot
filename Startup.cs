@@ -50,6 +50,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddTransient<IBot, QnABot<RootDialog>>();
 
             services.AddTransient<IQuestionInterceptor, QuestionInterceptor>();
+            services.AddSingleton<IQnAMakerAdapter, QnAMakerAdapter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
