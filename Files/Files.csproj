@@ -1,11 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Documents\, И. АВТОРЕФЕРАТ.pdf" />
+    <Content Remove="wwwroot\Documents\1.pdf" />
+    <Content Remove="wwwroot\Documents\ComputerScience\, И. АВТОРЕФЕРАТ.pdf" />
+    <Content Remove="wwwroot\Documents\ComputerScience\1.pdf" />
+    <Content Remove="wwwroot\Documents\ComputerScience\9d3d5749-3254-43de-baf9-f00ed14774be.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonModelBinder" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Documents\ComputerScience\" />
   </ItemGroup>
 
 </Project>
