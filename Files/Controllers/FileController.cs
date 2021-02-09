@@ -26,7 +26,7 @@ namespace Files.Controllers
         private readonly IFileUploadService _fileUploadService;
         private readonly FilesDbContext _dbContext;
 
-        [HttpPost("/file/new")]
+        [HttpPost("new")]
         public async Task<ActionResult> PostFile(
             [ModelBinder(BinderType = typeof(JsonModelBinder))] DTO.FileMetadataRequest fileMetadata,
             IFormFile file)
@@ -47,8 +47,6 @@ namespace Files.Controllers
             return Ok();
         }
 
-
-
         private async Task ConnectTags(DAL.Models.FileMetadata metadataEntity, IEnumerable<string> tagCandidates)
         {
             var existingTags = await _dbContext.FileTags
@@ -62,7 +60,13 @@ namespace Files.Controllers
             }
 
             var newTags = tagCandidates.Except(existingTags.Select(et => et.Tag));
-            metadataEntity.Tags = newTags.Select(nt => new DAL.Models.FileTag { Tag = nt}).ToList();
+            metadataEntity.Tags = newTags.Select(nt => new DAL.Models.FileTag { Tag = nt }).ToList();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetFileMetadata()
+        {
+            return Ok();
         }
     }
 }
