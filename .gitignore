@@ -11,3 +11,7 @@ packages/
 customdeploy/code.zip
 /timmybot-web-src/bin
 /timmybot-web-src/obj
+/AnswerExtraction/bin/Debug/netcoreapp3.1
+/AnswerExtraction/obj
+/Files/bin/Debug/net5.0
+/Files/obj
