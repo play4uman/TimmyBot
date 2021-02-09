@@ -39,7 +39,7 @@ namespace Files
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Files", Version = "v1" });
             });
 
-            services.AddDbContext<FileContext>(optionBuilder =>
+            services.AddDbContext<FilesDbContext>(optionBuilder =>
                 optionBuilder.UseSqlServer("Data Source=.;Initial Catalog=QnAFiles;Integrated Security=True"));
             services.AddSingleton<IFileUploadService, FileUploadService>();
         }

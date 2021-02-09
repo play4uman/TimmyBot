@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Files.Migrations
 {
     [DbContext(typeof(FilesDbContext))]
-    [Migration("20210209142459_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210209143635_FixFileNameType")]
+    partial class FixFileNameType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,8 +42,9 @@ namespace Files.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FileName")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilePath")
                         .IsRequired()

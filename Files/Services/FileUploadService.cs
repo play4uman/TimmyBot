@@ -20,7 +20,7 @@ namespace Files.Services
         public string AppBasePath { get => _hostingEnvironment.WebRootPath; }
         public const string DocumentsFolder = "Documents";
 
-        public async Task<(Guid fileId, string relativeUploadPath)> UploadFileAsync(IFormFile file, string category)
+        public async Task<(Guid fileId, string relativeUploadPath, string fileExtension)> UploadFileAsync(IFormFile file, string category)
         {
             var originalExtension = file.FileName.Split('.').Last();
 
@@ -35,7 +35,7 @@ namespace Files.Services
             using var fs = new FileStream(fullFilePath, FileMode.Create);
             await file.CopyToAsync(fs);
             
-            return (fileIdGuid, relativeToRootPath);
+            return (fileIdGuid, relativeToRootPath, originalExtension);
         }
     }
 }

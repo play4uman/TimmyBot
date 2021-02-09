@@ -8,6 +8,6 @@ namespace Files.Services
 {
     public interface IFileUploadService
     {
-        Task<(Guid fileId, string relativeUploadPath)> UploadFileAsync(IFormFile file, string category);
+        Task<(Guid fileId, string relativeUploadPath, string fileExtension)> UploadFileAsync(IFormFile file, string category);
     }
 }

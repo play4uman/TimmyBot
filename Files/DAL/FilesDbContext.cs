@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Files.DAL
 {
-    public class FileContext : DbContext
+    public class FilesDbContext : DbContext
     {
-        public FileContext(DbContextOptions<FileContext> options)
+        public FilesDbContext(DbContextOptions<FilesDbContext> options)
            : base(options)
         { }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Files.DTO
 {
-    public class FileMetadata
+    public class FileMetadataRequest
     {
         public string Category { get; set; }
         public string[] Tags { get; set; }

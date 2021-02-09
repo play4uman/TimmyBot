@@ -11,7 +11,7 @@ namespace Files.DAL.Models
         [Key]
         public Guid Id { get; set; }
         [Required]
-        public Guid FileName { get; set; }
+        public string FileName { get; set; }
         [Required]
         public string FilePath { get; set; }
         [Required]
