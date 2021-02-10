@@ -13,6 +13,10 @@ namespace Files.DAL.Models
         [Required]
         public string FileName { get; set; }
         [Required]
+        public string OriginalFileName { get; set; }
+        [Required]
+        public string Category { get; set; }
+        [Required]
         public string FilePath { get; set; }
         [Required]
         public int WordCount { get; set; }

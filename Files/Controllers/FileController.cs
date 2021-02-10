@@ -36,6 +36,8 @@ namespace Files.Controllers
             {
                 Id = fileUploadResult.fileId,
                 FileName = $"{fileUploadResult.fileId.ToString().ToUpper()}.{fileUploadResult.fileExtension}",
+                OriginalFileName = file.FileName,
+                Category = fileMetadata.Category,
                 FilePath = fileUploadResult.relativeUploadPath,
                 WordCount = 1 // todo calculate
             };
@@ -66,7 +68,21 @@ namespace Files.Controllers
         [HttpGet]
         public async Task<ActionResult> GetFileMetadata()
         {
-            return Ok();
+            var result = await _dbContext.FileMetadata
+                    .Include(fm => fm.Tags)
+                    .Select(fm => new  // We need this to prevent circular dependency when serializing.
+                    { 
+                        id = fm.Id,
+                        fileName = fm.FileName,
+                        filePath = fm.FilePath,
+                        originalName = fm.OriginalFileName,
+                        category = fm.Category,
+                        wordCount = fm.WordCount,
+                        tags = fm.Tags.Select(t => t.Tag) 
+                    })
+                    .ToListAsync();
+            
+            return Ok(result);
         }
     }
 }
