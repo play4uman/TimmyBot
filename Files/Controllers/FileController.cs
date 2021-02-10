@@ -79,7 +79,7 @@ namespace Files.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetFileMetadata()
+        public async Task<ActionResult<FileMetadataFullResponseDTO>> GetFileMetadata()
         {
             var result = new FileMetadataFullResponseDTO
             {
