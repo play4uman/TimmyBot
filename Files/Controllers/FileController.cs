@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,7 +40,8 @@ namespace Files.Controllers
                 OriginalFileName = file.FileName,
                 Category = fileMetadata.Category,
                 FilePath = fileUploadResult.relativeUploadPath,
-                WordCount = 1 // todo calculate
+                WordCount = CountWords(file),
+                PreferredParagraphDelimiter = fileMetadata.PreferredParagraphDelimiter
             };
             await ConnectTags(fileMetadataEntity, fileMetadata.Tags);
 
@@ -49,6 +51,7 @@ namespace Files.Controllers
             return Ok();
         }
 
+        // Gets the job done but it's just a quick hack. Needs rewriting
         private async Task ConnectTags(DAL.Models.FileMetadata metadataEntity, IEnumerable<string> tagCandidates)
         {
             var existingTags = await _dbContext.FileTags
@@ -63,6 +66,15 @@ namespace Files.Controllers
 
             var newTags = tagCandidates.Except(existingTags.Select(et => et.Tag));
             metadataEntity.Tags = newTags.Select(nt => new DAL.Models.FileTag { Tag = nt }).ToList();
+        }
+
+        // Quick and dirty - not optimized. Also it should be in a separate service
+        private int CountWords(IFormFile file)
+        {
+            using var sr = new StreamReader(file.OpenReadStream());
+            var text = sr.ReadToEnd();
+            int wordCount = text.Split(null).Length;
+            return wordCount;
         }
 
         [HttpGet]

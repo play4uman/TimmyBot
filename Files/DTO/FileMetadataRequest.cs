@@ -9,5 +9,6 @@ namespace Files.DTO
     {
         public string Category { get; set; }
         public string[] Tags { get; set; }
+        public int? PreferredParagraphDelimiter { get; set; }
     }
 }

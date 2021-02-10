@@ -20,6 +20,8 @@ namespace Files.DAL.Models
         public string FilePath { get; set; }
         [Required]
         public int WordCount { get; set; }
+        // \r = 10, \n = 10, \f = 12
+        public int? PreferredParagraphDelimiter { get; set; }
         public ICollection<FileTag> Tags { get; set; }
     }
 }

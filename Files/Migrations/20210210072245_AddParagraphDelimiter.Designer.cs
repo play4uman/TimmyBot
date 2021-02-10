@@ -4,14 +4,16 @@ using Files.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Files.Migrations
 {
     [DbContext(typeof(FilesDbContext))]
-    partial class FileContextModelSnapshot : ModelSnapshot
+    [Migration("20210210072245_AddParagraphDelimiter")]
+    partial class AddParagraphDelimiter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
