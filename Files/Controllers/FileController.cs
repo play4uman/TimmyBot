@@ -1,11 +1,12 @@
 ﻿using BrunoZell.ModelBinding;
 using Files.DAL;
 using Files.DAL.Models;
-using Files.DTO;
 using Files.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shared.DTO.Request;
+using Shared.DTO.Response;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +30,7 @@ namespace Files.Controllers
 
         [HttpPost("new")]
         public async Task<ActionResult> PostFile(
-            [ModelBinder(BinderType = typeof(JsonModelBinder))] DTO.FileMetadataRequest fileMetadata,
+            [ModelBinder(BinderType = typeof(JsonModelBinder))] FileMetadataUploadDTO fileMetadata,
             IFormFile file)
         {
             var fileUploadResult = await _fileUploadService.UploadFileAsync(file, fileMetadata.Category);
@@ -80,20 +81,16 @@ namespace Files.Controllers
         [HttpGet]
         public async Task<ActionResult> GetFileMetadata()
         {
-            var result = await _dbContext.FileMetadata
+            var result = new FileMetadataFullResponseDTO
+            {
+                Metadata = await _dbContext.FileMetadata
                     .Include(fm => fm.Tags)
-                    .Select(fm => new  // We need this to prevent circular dependency when serializing.
-                    { 
-                        id = fm.Id,
-                        fileName = fm.FileName,
-                        filePath = fm.FilePath,
-                        originalName = fm.OriginalFileName,
-                        category = fm.Category,
-                        wordCount = fm.WordCount,
-                        tags = fm.Tags.Select(t => t.Tag) 
-                    })
-                    .ToListAsync();
-            
+                    .Select(fm => fm.ToDto())
+                    .ToArrayAsync(),
+                AvgWordCount = await _dbContext.FileMetadata
+                    .AverageAsync(fm => fm.WordCount)
+            };
+                    
             return Ok(result);
         }
     }

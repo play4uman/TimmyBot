@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Files.DTO
+namespace Shared.DTO.Request
 {
-    public class FileMetadataRequest
+    public class FileMetadataUploadDTO
     {
         public string Category { get; set; }
         public string[] Tags { get; set; }
