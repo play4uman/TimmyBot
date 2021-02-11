@@ -29,7 +29,7 @@ namespace AnswerExtraction.Algorhitm.DocumentRanking
         private double KeywordScore(string doc, int docLength, string keyword, int numberOfDocs, double avgDocLength,
             Dictionary<string, int> keywordsContainedInMap)
         {
-            var idf = IDF(keyword, numberOfDocs, keywordsContainedInMap[keyword]);
+            var idf = IDF(numberOfDocs, keywordsContainedInMap[keyword]);
             var termFrequncy = TermFrequency(doc, keyword);
             var result = idf * (termFrequncy * (K1 + 1) / (termFrequncy + K1 * (1 - B + (B * docLength / avgDocLength))));
             return result;
@@ -39,10 +39,10 @@ namespace AnswerExtraction.Algorhitm.DocumentRanking
         // todo: Needs confirmation
         private int TermFrequency(string doc, string keyword)
         {
-            return doc.Split(null).Where(word => word == keyword).Count();
+            return doc.Split(null).Where(word => word.Equals(keyword, StringComparison.OrdinalIgnoreCase)).Count();
         }
 
-        private double IDF(string keyword, int numberOfDocs, int numberOfDocsContainingKeyword)
+        private double IDF(int numberOfDocs, int numberOfDocsContainingKeyword)
         {
             var intermediateResult = (double)((numberOfDocs - numberOfDocsContainingKeyword + 0.5) / (numberOfDocsContainingKeyword + 0.5)) + 1;
             return Math.Log(intermediateResult);

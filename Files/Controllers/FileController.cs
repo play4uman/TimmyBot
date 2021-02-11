@@ -85,6 +85,8 @@ namespace Files.Controllers
             {
                 Metadata = await _dbContext.FileMetadata
                     .Include(fm => fm.Tags)
+                    .Include(fm => fm.AssociatedKeywords)
+                        .ThenInclude(ak => ak.Keyword)
                     .Select(fm => fm.ToDto())
                     .ToArrayAsync(),
                 AvgWordCount = await _dbContext.FileMetadata

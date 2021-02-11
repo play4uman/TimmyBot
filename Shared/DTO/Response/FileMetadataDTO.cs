@@ -14,5 +14,6 @@ namespace Shared.DTO.Response
         public int WordCount { get; set; }
         public int? PreferredParagraphDelimiter { get; set; }
         public string[] Tags { get; set; }
+        public Dictionary<string, int> Keywords { get; set; }
     }
 }

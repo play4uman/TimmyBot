@@ -17,7 +17,17 @@ namespace Files.DAL
         public DbSet<FileTag> FileTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
+            modelBuilder.Entity<FileMetadataKeyword>()
+                .HasKey(fmkw => new { fmkw.FileId, fmkw.KeywordId });
+            modelBuilder.Entity<FileMetadataKeyword>()
+                .HasOne(fmkw => fmkw.File)
+                .WithMany(fm => fm.AssociatedKeywords)
+                .HasForeignKey(fmkw => fmkw.FileId);
+            modelBuilder.Entity<FileMetadataKeyword>()
+                .HasOne(fmkw => fmkw.Keyword)
+                .WithMany(kw => kw.OfFiles)
+                .HasForeignKey(fmkw => fmkw.KeywordId);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Files.DAL.Models
         // \r = 10, \n = 10, \f = 12
         public int? PreferredParagraphDelimiter { get; set; }
         public ICollection<FileTag> Tags { get; set; }
+        public ICollection<FileMetadataKeyword> AssociatedKeywords { get; set; }
 
         public FileMetadataDTO ToDto()
         {
@@ -36,7 +37,10 @@ namespace Files.DAL.Models
                 Category = this.Category,
                 WordCount = this.WordCount,
                 PreferredParagraphDelimiter = this.PreferredParagraphDelimiter,
-                Tags = this.Tags.Select(t => t.Tag).ToArray()
+                Tags = this.Tags.Select(t => t.Tag).ToArray(),
+                Keywords = this.AssociatedKeywords.ToDictionary(
+                    ak => ak.Keyword.Word,
+                    ak => ak.Times)
             };
             return result;
         }
