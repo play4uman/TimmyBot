@@ -1,3 +1,4 @@
+using AnswerExtraction.DI;
 using Files.DAL;
 using Files.Services;
 using Microsoft.AspNetCore.Builder;
@@ -16,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Files
@@ -41,7 +43,11 @@ namespace Files
 
             services.AddDbContext<FilesDbContext>(optionBuilder =>
                 optionBuilder.UseSqlServer("Data Source=.;Initial Catalog=QnAFiles;Integrated Security=True"));
+
+            var apiUrl = "https://localhost:44362";
+            services.AddHttpClient();
             services.AddSingleton<IFileUploadService, FileUploadService>();
+            services.AddAnswerExtraction(apiUrl);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

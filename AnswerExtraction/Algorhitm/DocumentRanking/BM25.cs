@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AnswerExtraction.Algorhitm.DocumentRanking
 {
-    public class BM25
+    public class BM25 : IBM25
     {
         private double _k1 = 1.2;
         public double K1 {

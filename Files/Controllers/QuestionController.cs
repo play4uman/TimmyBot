@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AnswerExtraction.Algorhitm;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,16 @@ namespace Files.Controllers
     [Route("[controller]")]
     public class QuestionController
     {
+        public QuestionController(IAnswerer answerer)
+        {
+            _answerer = answerer;
+        }
+
+        private readonly IAnswerer _answerer;
         [HttpGet]
         public async Task<string> GetAnswer(string q)
         {
-            return "Hello there";
+            return await _answerer.AnswerAsync(q);
         }
     }
 }
