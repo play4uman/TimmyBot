@@ -50,7 +50,7 @@ namespace AnswerExtraction.Algorhitm
             var docPairs = await Task.WhenAll(fileMetadata.Metadata
                                         .Select(async fm =>
                                         {
-                                            var doc = await _apiClient.LoadDocIntoMemoryAsync(fm.FilePath.Replace(@"\", @"/"));
+                                            var doc = await _apiClient.LoadDocIntoMemoryAsync(fm.FilePath);
                                             return (fm.Id, fm.OriginalName, doc, fm.WordCount);
                                         }));
                         

@@ -40,7 +40,7 @@ namespace Files.Controllers
                 FileName = $"{fileUploadResult.fileId.ToString().ToUpper()}.{fileUploadResult.fileExtension}",
                 OriginalFileName = file.FileName,
                 Category = fileMetadata.Category,
-                FilePath = fileUploadResult.relativeUploadPath,
+                FilePath = fileUploadResult.relativeUploadPath.Replace(@"\", "/"),
                 WordCount = CountWords(file),
                 PreferredParagraphDelimiter = fileMetadata.PreferredParagraphDelimiter
             };
