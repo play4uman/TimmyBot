@@ -1,6 +1,6 @@
-﻿using AnswerExtraction.Algorhitm;
-using AnswerExtraction.Algorhitm.DocumentRanking;
-using AnswerExtraction.Algorhitm.NLP;
+﻿using AnswerExtraction.Algorithm;
+using AnswerExtraction.Algorithm.DocumentRanking;
+using AnswerExtraction.Algorithm.NLP;
 using AnswerExtraction.API;
 using Microsoft.Extensions.DependencyInjection;
 using System;

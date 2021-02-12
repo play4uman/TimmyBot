@@ -1,5 +1,5 @@
-﻿using AnswerExtraction.Algorhitm.DocumentRanking;
-using AnswerExtraction.Algorhitm.NLP;
+﻿using AnswerExtraction.Algorithm.DocumentRanking;
+using AnswerExtraction.Algorithm.NLP;
 using AnswerExtraction.API;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.DTO.Request;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnswerExtraction.Algorhitm
+namespace AnswerExtraction.Algorithm
 {
     // Couldn't come up with a better name.
     public class Answerer : IAnswerer

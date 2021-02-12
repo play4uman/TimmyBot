@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnswerExtraction.Algorhitm.NLP
+namespace AnswerExtraction.Algorithm.NLP
 {
     public class QueryParser : IQueryParser
     {

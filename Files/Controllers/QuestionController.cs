@@ -1,4 +1,4 @@
-﻿using AnswerExtraction.Algorhitm;
+﻿using AnswerExtraction.Algorithm;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

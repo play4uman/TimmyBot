@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnswerExtraction.Algorhitm.DocumentRanking
+namespace AnswerExtraction.Algorithm.DocumentRanking
 {
     public class FlaggedKeyword : IEquatable<FlaggedKeyword>
     {

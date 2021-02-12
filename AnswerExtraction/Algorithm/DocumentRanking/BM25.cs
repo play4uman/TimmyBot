@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AnswerExtraction.Algorhitm.DocumentRanking
+namespace AnswerExtraction.Algorithm.DocumentRanking
 {
     public class BM25 : IBM25
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnswerExtraction.Algorhitm.NLP
+namespace AnswerExtraction.Algorithm
 {
-    public interface IQueryParser
+    public interface IAnswerer
     {
-        string[] ParseQuery(string query);
+        Task<string> AnswerAsync(string question);
     }
 }

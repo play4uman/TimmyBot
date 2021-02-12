@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnswerExtraction.Algorhitm
+namespace AnswerExtraction.Algorithm
 {
     public static class Tags
     {
