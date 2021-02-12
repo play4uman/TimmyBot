@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnswerExtraction.DI
+namespace AnswerExtraction.Extensions.DI
 {
     public static class ServiceCollectionAddAnswerExtractionExtensions
     {

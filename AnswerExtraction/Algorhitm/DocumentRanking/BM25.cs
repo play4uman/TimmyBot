@@ -20,24 +20,29 @@ namespace AnswerExtraction.Algorhitm.DocumentRanking
         }
         public double B { get; set; } = 0.75;
 
-        public double Compute(string doc, int docLength, IEnumerable<string> keywords, int numberOfDocs, double avgDocLength,
+        public double Compute(string doc, int docLength, IEnumerable<FlaggedKeyword> flaggedKeywords, int numberOfDocs, double avgDocLength,
             Dictionary<string, int> keywordsContainedInMap)
         {
-            return keywords.Sum(kw => KeywordScore(doc, docLength, kw, numberOfDocs, avgDocLength, keywordsContainedInMap));
+            return flaggedKeywords.Sum(kw =>
+            {
+                return KeywordScore(doc, docLength, kw, numberOfDocs, avgDocLength, keywordsContainedInMap);
+            }); 
         }
 
-        private double KeywordScore(string doc, int docLength, string keyword, int numberOfDocs, double avgDocLength,
+        private double KeywordScore(string doc, int docLength, FlaggedKeyword keyword, int numberOfDocs, double avgDocLength,
             Dictionary<string, int> keywordsContainedInMap)
         {
-            var idf = IDF(numberOfDocs, keywordsContainedInMap[keyword]);
-            var termFrequncy = TermFrequency(doc, keyword);
-            var result = idf * (termFrequncy * (K1 + 1) / (termFrequncy + K1 * (1 - B + (B * docLength / avgDocLength))));
+            var idf = IDF(numberOfDocs, keywordsContainedInMap[keyword.Keyword]);
+            int termFrequency = keyword.Matched ? keyword.Times.Value : TermFrequencyCount(doc, keyword.Keyword);
+            keyword.Times = termFrequency;
+
+            var result = idf * (termFrequency * (K1 + 1) / (termFrequency + K1 * (1 - B + (B * docLength / avgDocLength))));
             return result;
         }
 
         // I think it's safe to assume that we can use the raw term frequency as BM25 balances TF by using doc length and avg doc length
         // todo: Needs confirmation
-        private int TermFrequency(string doc, string keyword)
+        private int TermFrequencyCount(string doc, string keyword)
         {
             return doc.Split(null).Where(word => word.Equals(keyword, StringComparison.OrdinalIgnoreCase)).Count();
         }

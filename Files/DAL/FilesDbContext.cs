@@ -15,6 +15,7 @@ namespace Files.DAL
 
         public DbSet<FileMetadata> FileMetadata { get; set; }
         public DbSet<FileTag> FileTags { get; set; }
+        public DbSet<Keyword> Keywords { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

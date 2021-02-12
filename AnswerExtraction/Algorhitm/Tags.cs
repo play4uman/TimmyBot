@@ -17,7 +17,7 @@ namespace AnswerExtraction.Algorhitm
                                 var numberOfMatchedTags = fm.Tags.Intersect(keywords).Count();
                                 return new { fm, numberOfMatchedTags };
                             })
-                            .OrderBy(pair => pair.numberOfMatchedTags)
+                            .OrderByDescending(pair => pair.numberOfMatchedTags)
                             .First();
             return result.numberOfMatchedTags != 0 ? result.fm : null;         
         }

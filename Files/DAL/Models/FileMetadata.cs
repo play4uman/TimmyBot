@@ -38,7 +38,7 @@ namespace Files.DAL.Models
                 WordCount = this.WordCount,
                 PreferredParagraphDelimiter = this.PreferredParagraphDelimiter,
                 Tags = this.Tags.Select(t => t.Tag).ToArray(),
-                Keywords = this.AssociatedKeywords.ToDictionary(
+                KeywordsOccurances = this.AssociatedKeywords.ToDictionary(
                     ak => ak.Keyword.Word,
                     ak => ak.Times)
             };

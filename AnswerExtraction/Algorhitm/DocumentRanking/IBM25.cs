@@ -8,7 +8,7 @@ namespace AnswerExtraction.Algorhitm.DocumentRanking
 {
     public interface IBM25
     {
-        double Compute(string doc, int docLength, IEnumerable<string> keywords, int numberOfDocs, double avgDocLength,
+        double Compute(string doc, int docLength, IEnumerable<FlaggedKeyword> flaggedKeywords, int numberOfDocs, double avgDocLength,
             Dictionary<string, int> keywordsContainedInMap);
     }
 }

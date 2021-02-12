@@ -1,4 +1,4 @@
-using AnswerExtraction.DI;
+using AnswerExtraction.Extensions.DI;
 using Files.DAL;
 using Files.Services;
 using Microsoft.AspNetCore.Builder;

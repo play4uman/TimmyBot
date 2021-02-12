@@ -28,6 +28,24 @@ namespace Files.Controllers
         private readonly IFileUploadService _fileUploadService;
         private readonly FilesDbContext _dbContext;
 
+        [HttpGet]
+        public async Task<ActionResult<FileMetadataFullResponseDTO>> GetFileMetadata()
+        {
+            var result = new FileMetadataFullResponseDTO
+            {
+                Metadata = await _dbContext.FileMetadata
+                    .Include(fm => fm.Tags)
+                    .Include(fm => fm.AssociatedKeywords)
+                        .ThenInclude(ak => ak.Keyword)
+                    .Select(fm => fm.ToDto())
+                    .ToArrayAsync(),
+                AvgWordCount = await _dbContext.FileMetadata
+                    .AverageAsync(fm => fm.WordCount)
+            };
+
+            return Ok(result);
+        }
+
         [HttpPost("new")]
         public async Task<ActionResult> PostFile(
             [ModelBinder(BinderType = typeof(JsonModelBinder))] FileMetadataUploadDTO fileMetadata,
@@ -49,6 +67,35 @@ namespace Files.Controllers
             _dbContext.FileMetadata.Add(fileMetadataEntity);
             await _dbContext.SaveChangesAsync();
 
+            return Ok();
+        }
+
+        [HttpPost("keyword")]
+        public async Task<ActionResult> PostKeywordOccurancesForDocument(FileKeywordOccurancesPostDTO keywordOccurances)
+        {
+            var documentMetadata = await _dbContext.FileMetadata
+                 .Include(fm => fm.AssociatedKeywords)
+                 .SingleOrDefaultAsync(fm => fm.Id == keywordOccurances.FileId);
+            if (documentMetadata is null)
+                return BadRequest("The given file is not found");
+
+            var keyword = await _dbContext.Keywords
+                .FindAsync(keywordOccurances.Keyword);
+            if (keyword is null)
+            {
+                keyword = new Keyword { Word = keywordOccurances.Keyword};
+                _dbContext.Keywords.Add(keyword);
+            }
+
+
+            documentMetadata.AssociatedKeywords.Add(new FileMetadataKeyword
+            {
+                FileId = keywordOccurances.FileId,
+                Keyword = keyword,
+                Times = keywordOccurances.Times
+            });
+
+            await _dbContext.SaveChangesAsync();
             return Ok();
         }
 
@@ -76,24 +123,6 @@ namespace Files.Controllers
             var text = sr.ReadToEnd();
             int wordCount = text.Split(null).Length;
             return wordCount;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<FileMetadataFullResponseDTO>> GetFileMetadata()
-        {
-            var result = new FileMetadataFullResponseDTO
-            {
-                Metadata = await _dbContext.FileMetadata
-                    .Include(fm => fm.Tags)
-                    .Include(fm => fm.AssociatedKeywords)
-                        .ThenInclude(ak => ak.Keyword)
-                    .Select(fm => fm.ToDto())
-                    .ToArrayAsync(),
-                AvgWordCount = await _dbContext.FileMetadata
-                    .AverageAsync(fm => fm.WordCount)
-            };
-                    
-            return Ok(result);
         }
     }
 }

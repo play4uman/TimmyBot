@@ -2,6 +2,7 @@
 using AnswerExtraction.Algorhitm.NLP;
 using AnswerExtraction.API;
 using Microsoft.Extensions.DependencyInjection;
+using Shared.DTO.Request;
 using Shared.DTO.Response;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,6 @@ namespace AnswerExtraction.Algorhitm
 
         public async Task<string> AnswerAsync(string question)
         {
-            
             var keywords = _queryParser.ParseQuery(question);
             var fullMetadata = await _apiClient.FileAsync();
             var bestMatchedDocFromTag = Tags.BestMatch(keywords, fullMetadata.Metadata);
@@ -52,19 +52,49 @@ namespace AnswerExtraction.Algorhitm
                                         .Select(async fm =>
                                         {
                                             var doc = await _apiClient.LoadDocIntoMemoryAsync(fm.FilePath);
-                                            return (fm.Id, fm.OriginalName, doc, fm.WordCount);
+                                            return (fm.Id, fm.OriginalName, doc, fm.WordCount, fm.KeywordsOccurances);
                                         }));
                         
-
             var termFrequencyMap = BM25.GetKeywordContainedInDocsMap(keywords, docPairs.Select(dp => dp.doc));
+            var flaggedKeywords = GetFlaggedKeywods(keywords, fileMetadata);
 
-            // DEBUG ONLY
             var scores = docPairs.Select(pair =>
                 (Id: pair.Id, Doc: pair.doc,
-                    Score: _bM25.Compute(pair.doc, pair.WordCount, keywords, fileMetadata.Metadata.Length, fileMetadata.AvgWordCount, termFrequencyMap)))
-                .OrderByDescending(sc => sc.Score);
+                    Score: _bM25.Compute(pair.doc, pair.WordCount, flaggedKeywords.Where(fk => fk.FileId == pair.Id),
+                        fileMetadata.Metadata.Length, fileMetadata.AvgWordCount, termFrequencyMap)))
+                .OrderByDescending(sc => sc.Score)
+                .ToList();
+
+            await SendUnmatchedKeywords(flaggedKeywords.Where(fk => !fk.Matched));
 
             return scores.First().Doc;
+        }
+
+        private List<FlaggedKeyword> GetFlaggedKeywods(string[] keywords, FileMetadataFullResponseDTO fileMetadata)
+        {
+            var result = new List<FlaggedKeyword>();
+            foreach (var file in fileMetadata.Metadata)
+            {
+                foreach (var keyword in keywords)
+                {
+                    bool matched = file.KeywordsOccurances.TryGetValue(keyword, out int value);
+                    result.Add(new FlaggedKeyword(file.Id, keyword, matched, matched ? value : null));
+                }
+            }
+            return result;
+        }
+
+        private async Task SendUnmatchedKeywords(IEnumerable<FlaggedKeyword> flaggedUnsentKeywords)
+        {
+            foreach(var unsentKeyword in flaggedUnsentKeywords)
+            {
+                await _apiClient.KeywordAsync(new FileKeywordOccurancesPostDTO
+                {
+                    FileId = unsentKeyword.FileId,
+                    Keyword = unsentKeyword.Keyword,
+                    Times = unsentKeyword.Times.Value
+                });
+            }
         }
     }
 }
