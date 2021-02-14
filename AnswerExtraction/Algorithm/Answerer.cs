@@ -1,4 +1,5 @@
-﻿using AnswerExtraction.Algorithm.DocumentRanking;
+﻿using AnswerExtraction.Algorithm.DocumentParsing;
+using AnswerExtraction.Algorithm.DocumentRanking;
 using AnswerExtraction.Algorithm.NLP;
 using AnswerExtraction.API;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,16 +16,18 @@ namespace AnswerExtraction.Algorithm
     // Couldn't come up with a better name.
     public class Answerer : IAnswerer
     {
-        public Answerer(Client apiClient, IBM25 bM25, IQueryParser queryParser)
+        public Answerer(Client apiClient, IBM25 bM25, IQueryParser queryParser, IParagraphSplitter paragraphSplitter)
         {
             _apiClient = apiClient;
             _bM25 = bM25;
             _queryParser = queryParser;
+            _paragraphSplitter = paragraphSplitter;
         }
 
         private readonly Client _apiClient;
         private readonly IBM25 _bM25;
         private readonly IQueryParser _queryParser;
+        private readonly IParagraphSplitter _paragraphSplitter;
 
         public async Task<string> AnswerAsync(string question)
         {
@@ -42,6 +45,8 @@ namespace AnswerExtraction.Algorithm
             {
                 bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata);
             }
+
+            var passages = _paragraphSplitter.SplitIntoParagraphs(bestDoc);
             return "abc";
         }
 
@@ -96,5 +101,7 @@ namespace AnswerExtraction.Algorithm
                 });
             }
         }
+
+
     }
 }

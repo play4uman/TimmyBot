@@ -10,21 +10,23 @@ public class QueryParser {
     private ArrayList<QueryPair> chunckedTokens;
     private QueryTokenizer queryTokenizer;
     private QueryChunker queryChunker;
+    private QueryPOSTagger queryPOSTagger;
 
     public QueryParser(String query) throws IOException {
         queryTokenizer = new QueryTokenizer(query);
+        queryPOSTagger = new QueryPOSTagger(query);
         queryChunker = new QueryChunker(query);
-        setChunkedTokens();
+        generateChunkedTokens();
     }
 
     public ArrayList<QueryPair> getChunkedTokens() {
         return chunckedTokens;
     }
 
-    public void setChunkedTokens() {
+    private void generateChunkedTokens() {
         chunckedTokens = new ArrayList<>();
         for(int i = 0; i < queryTokenizer.getTokens().length; i++) {
-            QueryPair pair = new QueryPair(queryTokenizer.getTokens()[i], queryChunker.getChunks()[i]);
+            QueryPair pair = new QueryPair(queryTokenizer.getTokens()[i], queryChunker.getChunks()[i], queryPOSTagger.getTags()[i]);
             chunckedTokens.add(pair);
         }
     }
