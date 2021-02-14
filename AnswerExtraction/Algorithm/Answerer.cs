@@ -73,7 +73,7 @@ namespace AnswerExtraction.Algorithm
                 .OrderByDescending(sc => sc.Score)
                 .ToList();
 
-            //await SendUnmatchedKeywords(flaggedKeywords.Where(fk => !fk.Matched));
+            await SendUnmatchedKeywords(flaggedKeywords.Where(fk => !fk.Matched));
 
             return scores.First().Doc;
         }
@@ -96,12 +96,15 @@ namespace AnswerExtraction.Algorithm
         {
             foreach(var unsentKeyword in flaggedUnsentKeywords)
             {
-                await _apiClient.KeywordAsync(new FileKeywordOccurancesPostDTO
+                if (unsentKeyword.Times.HasValue) 
                 {
-                    FileId = unsentKeyword.FileId,
-                    Keyword = unsentKeyword.Keyword,
-                    Times = unsentKeyword.Times.Value
-                });
+                    await _apiClient.KeywordAsync(new FileKeywordOccurancesPostDTO
+                    {
+                        FileId = unsentKeyword.FileId,
+                        Keyword = unsentKeyword.Keyword,
+                        Times = unsentKeyword.Times.Value
+                    });
+                }
             }
         }
 
