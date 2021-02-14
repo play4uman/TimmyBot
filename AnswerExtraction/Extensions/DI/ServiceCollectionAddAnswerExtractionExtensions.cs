@@ -2,6 +2,7 @@
 using AnswerExtraction.Algorithm.DocumentRanking;
 using AnswerExtraction.Algorithm.NLP;
 using AnswerExtraction.API;
+using AnswerExtraction.ProcessExecution;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace AnswerExtraction.Extensions.DI
                 .AddTransient<IBM25, BM25>()
                 .AddTransient<IQueryParser, QueryParser>()
                 .AddTransient<IAnswerer, Answerer>()
-                .AddTransient<Client>(sc => new Client(apiUrl, sc.GetRequiredService<HttpClient>()));
+                .AddTransient<Client>(sc => new Client(apiUrl, sc.GetRequiredService<HttpClient>()))
+                .AddTransient<IExecutor, Executor>();
             return services;
         }
     }

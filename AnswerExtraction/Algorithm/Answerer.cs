@@ -28,9 +28,9 @@ namespace AnswerExtraction.Algorithm
 
         public async Task<string> AnswerAsync(string question)
         {
-            var keywords = _queryParser.ParseQuery(question);
+            var queryParseResult = await _queryParser.ParseQueryAsync(question);
             var fullMetadata = await _apiClient.FileAsync();
-            var bestMatchedDocFromTag = Tags.BestMatch(keywords, fullMetadata.Metadata);
+            var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, fullMetadata.Metadata);
 
             string bestDoc;
             if (bestMatchedDocFromTag != null)
@@ -40,7 +40,7 @@ namespace AnswerExtraction.Algorithm
             }
             else
             {
-                bestDoc = await GetBestDocBasedOnBm25Score(keywords, fullMetadata);
+                bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata);
             }
             return "abc";
         }

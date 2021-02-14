@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AnswerExtraction.Algorithm.NLP
 {
-    public interface IQueryParser
+    public class QueryParsingResult
     {
-        Task<QueryParsingResult> ParseQueryAsync(string query);
+        public string[] BM25Tokens { get; set; }
+        public string[] BERTTokens { get; set; }
     }
 }
