@@ -9,7 +9,7 @@ namespace AnswerExtraction.Algorithm
 {
     public static class Tags
     {
-        public static FileMetadataDTO BestMatch(string[] keywords, FileMetadataDTO[] filesMetadata)
+        public static FileMetadataDTO BestMatch(string[] keywords, IEnumerable<FileMetadataDTO> filesMetadata)
         {
             var result = filesMetadata
                             .Select(fm =>

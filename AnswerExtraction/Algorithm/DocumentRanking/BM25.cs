@@ -45,7 +45,7 @@ namespace AnswerExtraction.Algorithm.DocumentRanking
         // todo: Needs confirmation
         private int TermFrequencyCount(string doc, string keyword)
         {
-            var regex = new Regex(keyword, RegexOptions.Compiled);
+            var regex = new Regex(keyword, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             int matches = regex.Matches(doc).Count;
             return matches;
         }

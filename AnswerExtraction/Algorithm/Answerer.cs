@@ -29,11 +29,13 @@ namespace AnswerExtraction.Algorithm
         private readonly IQueryParser _queryParser;
         private readonly IParagraphSplitter _paragraphSplitter;
 
-        public async Task<string> AnswerAsync(string question)
+        public async Task<string> AnswerAsync(string question, string subject)
         {
             var queryParseResult = await _queryParser.ParseQueryAsync(question);
             var fullMetadata = await _apiClient.FileAsync();
-            var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, fullMetadata.Metadata);
+            var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, 
+                fullMetadata.Metadata
+                    .Where(m => m.Category.Equals(subject, StringComparison.OrdinalIgnoreCase)));
 
             string bestDoc;
             if (bestMatchedDocFromTag != null)
@@ -43,17 +45,18 @@ namespace AnswerExtraction.Algorithm
             }
             else
             {
-                bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata);
+                bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata, subject);
             }
 
             var passages = _paragraphSplitter.SplitIntoParagraphs(bestDoc);
             return "abc";
         }
 
-        private async Task<string> GetBestDocBasedOnBm25Score(string[] keywords, FileMetadataFullResponseDTO fileMetadata)
+        private async Task<string> GetBestDocBasedOnBm25Score(string[] keywords, FileMetadataFullResponseDTO fileMetadata, string subject)
         {
             // Load all documents into memory and associate them with the number of words they have.
             var docPairs = await Task.WhenAll(fileMetadata.Metadata
+                                        .Where(fm => fm.Category.Equals(subject, StringComparison.OrdinalIgnoreCase))
                                         .Select(async fm =>
                                         {
                                             var doc = await _apiClient.LoadDocIntoMemoryAsync(fm.FilePath);
@@ -70,7 +73,7 @@ namespace AnswerExtraction.Algorithm
                 .OrderByDescending(sc => sc.Score)
                 .ToList();
 
-            await SendUnmatchedKeywords(flaggedKeywords.Where(fk => !fk.Matched));
+            //await SendUnmatchedKeywords(flaggedKeywords.Where(fk => !fk.Matched));
 
             return scores.First().Doc;
         }

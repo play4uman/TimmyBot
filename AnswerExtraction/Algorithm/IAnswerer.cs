@@ -8,6 +8,6 @@ namespace AnswerExtraction.Algorithm
 {
     public interface IAnswerer
     {
-        Task<string> AnswerAsync(string question);
+        Task<string> AnswerAsync(string question, string subject);
     }
 }

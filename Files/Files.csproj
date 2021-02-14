@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Documents\ComputerScience\" />
+    <Folder Include="wwwroot\Documents\Psychology\" />
   </ItemGroup>
 
   <ItemGroup>
