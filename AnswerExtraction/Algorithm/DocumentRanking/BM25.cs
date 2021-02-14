@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AnswerExtraction.Algorithm.DocumentRanking
 {
@@ -44,7 +45,9 @@ namespace AnswerExtraction.Algorithm.DocumentRanking
         // todo: Needs confirmation
         private int TermFrequencyCount(string doc, string keyword)
         {
-            return doc.Split(null).Where(word => word.Equals(keyword, StringComparison.OrdinalIgnoreCase)).Count();
+            var regex = new Regex(keyword, RegexOptions.Compiled);
+            int matches = regex.Matches(doc).Count;
+            return matches;
         }
 
         private double IDF(int numberOfDocs, int numberOfDocsContainingKeyword)
