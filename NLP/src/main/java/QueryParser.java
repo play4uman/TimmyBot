@@ -12,6 +12,8 @@ public class QueryParser {
     private QueryChunker queryChunker;
     private QueryPOSTagger queryPOSTagger;
 
+    private String toBeVerbs[] = {"is", "are", "was", "were"};
+
     public QueryParser(String query) throws IOException {
         queryTokenizer = new QueryTokenizer(query);
         queryPOSTagger = new QueryPOSTagger(query);
@@ -57,9 +59,19 @@ public class QueryParser {
                     .collect(Collectors.toCollection(HashSet::new));
             List<String> result = chunkedTokens.stream()
                     .filter(t -> !contents.contains(t.toLowerCase()))
+                    .map(t ->{
+                        String tokens[] = t.split("\\s+");
+                        if(tokens.length >= 2 && Arrays.stream(toBeVerbs).anyMatch(tokens[0]::equalsIgnoreCase)){
+                            String temp = tokens[0];
+                            tokens[0] = tokens[1];
+                            tokens[1] = temp;
+                        }
+                        return String.format("%s %s", tokens[0], tokens[1]);
+                    })
                     .collect(Collectors.toList());
             return result;
         }
+
 
     }
 }

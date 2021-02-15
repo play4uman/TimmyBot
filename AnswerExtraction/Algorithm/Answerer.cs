@@ -31,6 +31,7 @@ namespace AnswerExtraction.Algorithm
 
         public async Task<string> AnswerAsync(string question, string subject)
         {
+            question = AddQuestionMarkIfNotExists(question);
             var queryParseResult = await _queryParser.ParseQueryAsync(question);
             var fullMetadata = await _apiClient.FileAsync();
             var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, 
@@ -76,6 +77,11 @@ namespace AnswerExtraction.Algorithm
             await SendUnmatchedKeywords(flaggedKeywords.Where(fk => !fk.Matched));
 
             return scores.First().Doc;
+        }
+
+        private string AddQuestionMarkIfNotExists(string query)
+        {
+            return !query.EndsWith('?') ? query + "?" : query;
         }
 
         private List<FlaggedKeyword> GetFlaggedKeywods(string[] keywords, FileMetadataFullResponseDTO fileMetadata)
