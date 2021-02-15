@@ -34,27 +34,30 @@ namespace AnswerExtraction.Algorithm
 
         public async Task<string> AnswerAsync(string question, string subject)
         {
-            var answ = await _bertWrapper.GetAnswerAsync(question, subject, true /* DEBUG ONLY - SET TO TRUE IN RELEASE */);
-            //question = AddQuestionMarkIfNotExists(question);
-            //var queryParseResult = await _queryParser.ParseQueryAsync(question);
-            //var fullMetadata = await _apiClient.FileAsync();
-            //var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, 
-            //    fullMetadata.Metadata
-            //        .Where(m => m.Category.Equals(subject, StringComparison.OrdinalIgnoreCase)));
+            question = AddQuestionMarkIfNotExists(question);
+            var queryParseResult = await _queryParser.ParseQueryAsync(question);
+            var fullMetadata = await _apiClient.FileAsync();
+            var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens,
+                fullMetadata.Metadata
+                    .Where(m => m.Category.Equals(subject, StringComparison.OrdinalIgnoreCase)));
 
-            //string bestDoc;
-            //if (bestMatchedDocFromTag != null)
-            //{
-            //    var bestDocUrl = bestMatchedDocFromTag.FilePath;
-            //    bestDoc = await _apiClient.LoadDocIntoMemoryAsync(bestDocUrl);
-            //}
-            //else
-            //{
-            //    bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata, subject);
-            //}
+            string bestDoc;
+            if (bestMatchedDocFromTag != null)
+            {
+                var bestDocUrl = bestMatchedDocFromTag.FilePath;
+                bestDoc = await _apiClient.LoadDocIntoMemoryAsync(bestDocUrl);
+            }
+            else
+            {
+                bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata, subject);
+            }
 
-            //var passages = _paragraphSplitter.SplitIntoParagraphs(bestDoc);
-            return answ;
+
+            var passages = _paragraphSplitter.SplitIntoParagraphs(bestDoc);
+            var bestPassage = GetBestPassage(passages, queryParseResult.BM25Tokens);
+            var answer = await _bertWrapper.GetAnswerAsync(question, bestPassage);
+
+            return answer;
         }
 
         private async Task<string> GetBestDocBasedOnBm25Score(string[] keywords, FileMetadataFullResponseDTO fileMetadata, string subject)
@@ -118,6 +121,24 @@ namespace AnswerExtraction.Algorithm
             }
         }
 
+        private string GetBestPassage(string[] passages, string[] keywords)
+        {
+            var passageWordCountMap = passages.Select(p => new { passage = p, wordCount = p.Split(null).Length });
+            int numberOfPassages = passages.Length;
+            double avgWordCount = passageWordCountMap.Average(p => p.wordCount);
+            var keywordsAsFlagged = keywords.Select(t => new FlaggedKeyword(default, t, false));
+            var keywordsContainedInDocMap = BM25.GetKeywordContainedInDocsMap(keywords, passages);
+            var passagesOrdered = passageWordCountMap
+                                    .Select(p => new
+                                    {
+                                        passage = p.passage,
+                                        score = _bM25.Compute(p.passage, p.wordCount, keywordsAsFlagged, numberOfPassages,
+                                        avgWordCount, keywordsContainedInDocMap)
+                                    })
+                                    .OrderByDescending(pair => pair.score)
+                                    .ToList();
 
+            return passagesOrdered.First().passage;
+        }
     }
 }

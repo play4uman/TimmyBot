@@ -10,7 +10,7 @@ namespace AnswerExtraction.Algorithm.DocumentParsing
     {
         public string[] SplitIntoParagraphs(string doc)
         {
-            string[] paragraphs = doc.Split(Environment.NewLine + Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            string[] paragraphs = doc.Split($"{Environment.NewLine}{Environment.NewLine}");
             return paragraphs;
         }
     }

@@ -41,7 +41,7 @@ namespace AnswerExtraction.Algorithm.BERT
             DataReceivedEventHandler onReadyReceived = (s, ea) =>
             {
                 if (ea.Data == "READY")
-                { 
+                {
                     tcs.SetResult();
                 }
             };
@@ -61,10 +61,15 @@ namespace AnswerExtraction.Algorithm.BERT
             }
 
             var tcs = new TaskCompletionSource<string>();
+            int timesEntered = 0;
             _bertProcessHandle.OutputDataReceived += (s, ea) =>
             {
-                var answer = ea.Data.Split("ANSWER: ")[1];
-                tcs.SetResult(answer);
+                if (ea.Data.StartsWith("ANSWER: ") && timesEntered < 1)
+                {
+                    timesEntered++;
+                    var answer = ea.Data.Split("ANSWER: ")[1];
+                    tcs.SetResult(answer);
+                }
             };
 
             _processInput.WriteLine(question);
