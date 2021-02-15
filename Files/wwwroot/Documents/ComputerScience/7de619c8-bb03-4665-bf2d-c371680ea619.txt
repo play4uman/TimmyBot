@@ -1,0 +1,558 @@
+HTML & CSS
+
+HTML & CSS
+Design and build Websites
+
+Introduction
+XX About this book XX How the web works XX Learning from other pages
+
+Firstly, thank you for picking up this book. It has been written with two very different types of people in mind:
+●● Those who want to learn how to design and build websites from scratch
+●● Anyone who has a website (that may be built using a content management system, blogging software, or an e-commerce platform) and wants more control over the appearance of their pages
+The only things you need in order to use this book are a computer with a web browser and a text editor (such as Notepad, which comes with Windows, or TextEdit, which comes with Macs).
+
+Introduction pages come at the beginning of each chapter. They introduce the key topics you will learn about.
+
+Reference pages introduce key pieces of HTML & CSS code. The HTML code is shown in blue and CSS code is shown in pink.
+
+Background pages appear on white; they explain the context of the topics covered that are discussed in each chapter.
+
+Diagram and infographics pages are shown on a dark background. They provide a simple, visual reference to topics discussed.
+
+Example pages put together the topics you have learned and demonstrate how they can be applied in each.
+
+Summary pages come at the end of each chapter. They remind you of the key topics that were covered in each chapter.
+
+Is it hard to Learn?
+Many books that teach HTML and CSS resemble dull manuals. To make it easier for you to learn, we threw away the traditional template used by publishers and redesigned this book from scratch.
+At work, when people look at my screen and see it full of code, it's not unusual to get a comment about it looking very complicated or how clever I must be to understand it. The truth is, it's not that hard to learn how to write web pages and read the code used to create them; you certainly don't have to be a "programmer."
+Understanding HTML and CSS can help anyone who works with the web; designers can create more attractive and usable sites, website editors can create better content, marketers can communicate with their audience more effectively, and managers can commission better sites and get the best out of their teams.
+I've focussed on the code you need to use 90% of the time and omitted the code that you would rarely see even if writing websites is your full time job. By the end of the book, if you come across the other 10% you will be able to Google it to find out what it means quickly and easily.
+I have also added practical information on topics I am commonly asked about, such as how to prepare images, audio and video for the web, how to approach the design and build of a new site, how to improve your rankings in search engines (SEO), and how to use Google Analytics to learn about visitors to your site.
+
+The Structure of This Book
+In order to teach you about creating web pages, this book is divided into three sections:
+1: HTML
+We will spend the first chapter looking at how HTML is used to create web pages. You will see that you start by writing down the words you want to appear on your page. You then add tags or elements to the words so that the browser knows what is a heading, where a paragraph begins and ends, and so on.
+The rest of this section introduces the tags you have at your disposal to create web pages, grouped into chapters on: text, lists, links, images, tables, forms, video audio and flash, and miscellaneous elements.
+I should warn you that the examples in the first nine chapters are not exciting to look at, yet they are the foundation of every web page. The following chapters on CSS will show you how to make your pages look a lot more interesting.
+2: CSS
+We start this section with a chapter that explains how CSS uses rules to enable you to control the styling and layout of web pages. We then go on to look at the wide variety of CSS properties you can use in your CSS rules. These properties generally fall into one of two categories:
+Presentation: How to control things like the color of text, the fonts you want to use and the size of those fonts, how to add background colors to pages (or parts of a page), and how to add background images.
+Layout: How to control where the different elements are positioned on the screen. You will also learn several techniques that professionals use to make their pages more attractive.
+3: Practical
+We end up with some helpful information that will assist you in building better websites.
+We look at some new tags that will be introduced in HTML5 to help describe the structure of your pages. HTML5 is the latest version of HTML (still under development at the time of writing). Before learning about these elements, you need a good grasp of how CSS is used to control the design of web pages. There is a chapter that talks you through a design process that you might like to follow when creating a new website.
+Finally, we end up looking at topics that will help you once you have built your site, such as putting it on the web, search engine optimisation (SEO) and using analytics software to track who comes to your site and what they are looking at.
+
+How People Access the Web
+Before we look at the code used to build websites it is important to consider the different ways in which people access the web and clarify some terminology.
+Browsers
+People access websites using software called a web browser. Popular examples include Firefox, Internet Explorer, Safari, Chrome, and Opera.
+In order to view a web page, users might type a web address into their browser, follow a link from another site, or use a bookmark.
+Software manufacturers regularly release new versions of browsers with new features and supporting new additions to languages. It is important, however, to remember that many computer owners will not be running the latest versions of these browsers. Therefore you cannot rely on all visitors to your site being able to use the latest functionality offered in all browsers.
+You will learn how to tell which browsers visitors use to access your website in Chapter 19.
+Web Servers
+When you ask your browser for a web page, the request is sent across the Internet to a special computer known as a web server which hosts the website.
+Web servers are special computers that are constantly connected to the Internet, and are optimized to send web pages out to people who request them.
+Some big companies run their own web servers, but it is more common to use the services of a web hosting company who charge a fee to host your site.
+Devices
+People are accessing websites on an increasing range of devices including desktop computers, laptops, tablets, and mobile phones. It is important to remember that various devices have different screen sizes and some have faster connections to the web than others.
+Screen readers
+Screen readers are programs that read out the contents of a computer screen to a user. They are commonly used by people with visual impairments.
+In the same way that many countries have legislations that require public buildings to be accessible to those with disabilities, many laws have also been passed that require websites be accessible to those with disabilities.
+Throughout this book you will see several references to screen readers. These notes will help ensure that the sites you create are accessible to people who use such software.
+It is interesting to note that technologies similar to those employed by screen readers are also being used in other areas where people are unable read a screen, such as when they are driving or jogging.
+
+
+How Websites Are Created
+What you see
+When you are looking at a website, it is most likely that your browser will be receiving HTML and CSS from the web server that hosts the site. The web browser interprets the HTML and CSS code to create the page that you see.
+Most web pages also include extra content such as images, audio, video, or animations and this book will teach you how to prepare them for use on the web and then how to insert them into your web pages.
+Some sites also send JavaScript or Flash to your browser, and you will see how to add JavaScript and Flash in your web pages. Both of these technologies are advanced topics that you can go on to learn more about once you have mastered HTML and CSS, if you want to.
+All websites use HTML and CSS, but content management systems, blogging software, and e-commerce platforms often add a few more technologies into the mix.
+How it is Created
+Small websites are often written just using HTML and CSS.
+Larger websites — in particular those that are updated regularly and use a content management system (CMS), blogging tools, or e-commerce software — often make use of more complex technologies on the web server, but these technologies are actually used to produce HTML and CSS that is then sent to the browser. So, if your site uses these technologies, you will be able to use your new HTML and CSS knowledge to take more control over how your site looks.
+Larger, more complex sites like these may use a database to store data, and programming languages such as PHP, ASP.Net, Java, or Ruby on the web server, but you do not need to know these technologies to improve what the user sees. The skills you'll learn in this book should be enough to help you on that road.
+
+HTML5 & CSS3
+Since the web was first created there have been several versions of HTML and CSS — each intended to be an improvement on the previous version.
+At the time of writing this book, HTML5 & CSS3 were still being developed. Although they had not been finalized, many browsers were already supporting some features of these languages and a lot of people were using the latest code on their websites. I have therefore chosen to teach you these latest versions.
+Because HTML5 and CSS3 build on previous versions of these languages, learning these means you will also be able to understand the earlier versions of them. I have added clear notes when the code is new and also when it might not work in older browsers.
+
+How the Web Works
+When you visit a website, the web server hosting that site could be anywhere in the world. In order for you to find the location of the web server, your browser will first connect to a Domain Name System (DNS) server.
+On this page you can see examples that demonstrate how the web server that hosts the website you are visiting can be anywhere in the world. It is the DNS servers that tell your browser how to find the website.
+●● A user in Barcelona visits sony.jp in Tokyo
+●● A user in New York visits google.com in San Francisco
+●● A user in Stockholm visits qantas.com.au in Sydney
+●● A user in Vancouver visits airindia.in in Bangalore
+On the right you can see what happens when a web user in England wants to view the website of the Louvre art gallery in France which is located at www.louvre.fr. Firstly, the browser in Cambridge contacts a DNS server in London. The DNS server then tells the browser the location of the web server hosting the site in Paris.
+
+1 When you connect to the web, you do so via an Internet Service Provider (ISP). You type a domain name or web address into your browser to visit a site; for example: google.com, bbc.co.uk, microsoft.com.
+3 The unique number that the DNS server returns to your computer allows your browser to contact the web server that hosts the website you requested. A web server is a computer that is constantly connected to the web, and is set up especially to send web pages to users.
+2 Your computer contacts a network of servers called Domain Name System (DNS) servers. These act like phone books; they tell your computer the IP address associated with the requested domain name. An IP address is a number of up to 12 digits separated by periods / full stops. Every device connected to the web has a unique IP address; it is like the phone number for that computer.
+Cambridge
+LONDON
+PARIS
+4 The web server then sends the page you requested back to your web browser.
+
+1
+Structure
+XX Understanding structure XX Learning about markup XX Tags and elements
+We come across all kinds of documents every day of our lives. Newspapers, insurance forms, shop catalogues... the list goes on.
+Many web pages act like electronic versions of these documents. For example, newspapers show the same stories in print as they do on websites; you can apply for insurance over the web; and stores have online catalogs and e-commerce facilities. In all kinds of documents, structure is very important in helping readers to understand the messages you are trying to convey and to navigate around the document. So, in order to learn how to write web pages, it is very important to understand how to structure documents. In this chapter you will: ●● See how HTML describes the structure of a web page ●● Learn how tags or elements are added to your document ●● Write your first web page
+
+How Pages Use Structure
+Think about the stories you read in a newspaper: for each story, there will be a headline, some text, and possibly some images. If the article is a long piece, there may be subheadings that split the story into separate sections or quotes from those involved. Structure helps readers understand the stories in the newspaper.
+The structure is very similar when a news story is viewed online (although it may also feature audio or video). This is illustrated on the right with a copy of a newspaper alongside the corresponding article on its website.
+Now think about a very different type of document — an insurance form. Insurance forms often have headings for different sections, and each section contains a list of questions with areas for you to fill in details or checkboxes to tick. Again, the structure is very similar online.
+
+Structuring Word Documents
+The use of headings and subheadings in any document often reflects a hierarchy of information. For example, a document might start with a large heading, followed by an introduction or the most important information.
+This might be expanded upon under subheadings lower down on the page. When using a word processor to create a document, we separate out the text to give it structure. Each topic might have a new paragraph, and each section can have a heading to describe what it covers.
+On the right, you can see a simple document in Microsoft Word. The different styles for the document, such as different levels of heading, are shown in the drop down box. If you regularly use Word, you might have also used the formatting toolbar or palette to do this.
+
+On the previous page you saw how structure was added to a Word document to make it easier to understand. We use structure in the same way when writing web pages.
+HTML Describes the Structure of Pages
+In the browser window you can see a web page that features exactly the same content as the Word document you met on the page 18. To describe the structure of a web page, we add code to the words we want to appear on the page.
+You can see the HTML code for this page below. Don't worry about what the code means yet. We start to look at it in more detail on the next page. Note that the HTML code is in blue, and the text you see on screen is in black.
+The HTML code (in blue) is made up of characters that live inside angled brackets — these are called HTML elements. Elements are usually made up of two tags: an opening tag and a closing tag. (The closing tag has an extra forward slash in it.) Each HTML element tells the browser something about the information that sits between its opening and closing tags.
+
+HTML Uses Elements to Describe the Structure of Pages
+Let's look closer at the code from the last page. There are several different elements. Each element has an opening tag and a closing tag.
+
+Tags act like containers. They tell you something about the information that lies between their opening and closing tags.
+Description
+The opening <html> tag indicates that anything between it and a closing </html> tag is HTML code. The <body> tag indicates that anything between it and the closing </body> tag should be shown inside the main browser window. Words between <h1> and </h1> are a main heading. A paragraph of text appears between these <p> and </p> tags.
+Words between <h2> and </h2> form a sub-heading. Here is another paragraph between opening <p> and closing </p> tags.
+Another sub-heading inside <h2> and </h2> tags. Another paragraph inside <p> and </p> tags. The closing </body> tag indicates the end of what should appear in the main browser window. The closing </html> tag indicates that it is the end of the HTML code.
+STRUCTURE 22
+
+A Closer Look at Tags
+Opening Tag
+The characters in the brackets indicate the tag's purpose.
+For example, in the tags above the p stands for paragraph.
+The closing tag has a forward slash after the the < symbol.
+
+Character
+</p>
+left-angle bracket (less-than sign)
+Forward Slash
+RIGHT-angle bracket (MORE-than sign)
+Closing Tag
+The terms "tag" and "element" are often used interchangeably.
+Strictly speaking, however, an element comprises the opening
+tag and the closing tag and any content that lies between them.
+
+Attributes Tell Us More About Elements
+Attributes provide additional information about the contents of an element. They appear on the opening tag of the element and are made up of two parts: a name and a value, separated by an equals sign.
+The attribute name indicates what kind of extra information you are supplying about the element's content. It should be written in lowercase.
+The value is the information or setting for the attribute. It should be placed in double quotes. Different attributes can have different values.
+Here an attribute called lang is used to indicate the language used in this element. The value of this attribute on this page specifies it is in US English.
+
+HTML5 allows you to use uppercase attribute names and omit the quotemarks, but this is not recommended.
+The majority of attributes can only be used on certain elements, although a few attributes (such as lang) can appear on any element.
+Most attribute values are either pre-deﬁned or follow a stipulated format. We will look at the permitted values as we introduce each new attribute.
+The value of the lang attribute is an abbreviated way of specifying which language is used inside the element that all browsers understand.
+
+Body, Head & Title
+You met the <body> element in the first example we created. Everything inside this element is shown inside the main browser window.
+Before the <body> element you will often see a <head> element. This contains information about the page (rather than information that is shown within the main part of the browser window that is highlighted in blue on the opposite page). You will usually find a <title> element inside the <head> element.
+The contents of the <title> element are either shown in the top of the browser, above where you usually type in the URL of the page you want to visit, or on the tab for that page (if your browser uses tabs to allow you to view multiple pages at the same time).
+
+HTML
+Anything written between the <title> tags will appear in the title bar (or tabs) at the top of the browser window, highlighted in orange here.
+Anything written between the <body> tags will appear in the main browser window, highlighted in blue here.
+You may know that HTML stands for HyperText Markup Language. The HyperText part refers to the fact that HTML allows you to create links that allow visitors to move from one
+page to another quickly and easily. A markup language allows you to annotate text, and these annotations provide additional meaning to the contents of a document. If you think of a web
+page, we add code around the original text we want to display and the browser then uses the code to display the page correctly. So the tags we add are the markup.
+
+
+Creating a Web Page on a PC
+To create your first web page on a PC, start up Notepad. You can find this by going to: Start All Programs (or Programs) Accessories Notepad
+You might also like to download a free editor called Notepad++ from notepad-plus-plus.org.
+Type the code shown on the right.
+
+Article
+
+Go to the File menu and select Save as... You will need to save the file somewhere you can remember. If you like, you could create a folder for any examples that you try out from this book.
+Save this file as first-test. html. Make sure that the Save as type drop down has All Files selected  Start your web browser. Go to the File menu and select Open.
+Browse to the file that you just created, select it and click on the Open button. The result should look something like the screen shot to the left.
+If it doesn't look like this, find the file you just created on your computer and make sure that it has the file extension .html (if it is .txt then you need to go back to Notepad and save the file again, but this time put quote marks around the name "firsttest.html").
+
+Creating a Web Page on a Mac
+To create your first web page on a Mac, start up TextEdit. This should be in your Applications folder.
+You might also like to download a free text editor for creating web pages called TextWrangler which is available from barebones.com.
+Type the code shown on the right.
+
+
+Article
+Now go to the File menu and select Save as... You will need to save the file somewhere you can remember. If you like, you could create a folder for any examples that you try out from this book. Save this file as first-test.html. You will probably see a window like the screen shot to the left. You want to select the Use .html button. Next, start your web browser, go to the File menu, and select
+Open. You should browse to the file that you just created, select it and click on the Open button. The result should look like the screen shot to the left.
+If it doesn't look like this, you might need to change one of the settings in TextEdit. Go to the TextEdit menu and select Preferences. Then on the preferences for Open and Save, tick the box that says Ignore rich text commands in HTML files. Now try to save the file again.
+
+Code in a Content Management System
+If you are working with a content management system, blogging platform, or e-commerce application, you will probably log into a special administration section of the website to control it. The tools provided in the administration sections of these sites usually allow you to edit parts of the page rather than the entire page, which means you will rarely see the <html>, <head>, or <body> elements.
+Looking at the content management system on the opposite page, you have a box that allows you to enter a title for the page, another box for the main article, a way to enter a publication date, and something to indicate which section of the site this page belongs in. For an e-commerce store, you might have boxes that allow you to enter a title for the product, a description of the product, its price, and the quantity available.
+That is because they use a single 'template' to control all of the pages for a section of the site. (For example, an e-commerce system might use the same template to show all of their products.) The information you supply is placed into the templates. The advantage of this approach is that people who do not know how to write web pages can add information to a website and it is also possible to change the presentation of something in the template, and it will automatically update every page that uses that template. If you imagine an e-commerce store with 1,000 items for sale, just
+
+altering one template is a lot easier than changing the page for each individual product. In systems like this, when you have a large block of text that you can edit, such as a news article, blog entry or the description of a product in an e-commerce store, you will often see a text editor displayed. Text editors usually have controls a little like those on your word processor, giving you different options to style text, add links or insert images. Behind the scenes these editors are adding HTML code to your text, just like the code you have seen earlier in this chapter. Many of these editors will have an option that allows you to see (and edit) the code that they produce.
+Once you know how to read and edit this code, you can take more control over these sections of your website. In the example above, you can see that the text editor has a tab for Visual / HTML views of what the user enters. Other systems might have a button (which often shows angle brackets) to indicate how to access the code.
+Some content management systems offer tools that also allow you to edit the template files. If you do try to edit template files you need to check the documentation for your CMS as they all differ from each other. You need to be careful when editing template files because if you delete the wrong piece of code or add something in the wrong place the site may stop working entirely.
+
+Looking at How Other sites are Built
+
+When the web was first taking off, one of the most common ways to learn about HTML and discover new tips and techniques was to look at the source code that made up web pages.
+These days there are many more books and online tutorials that teach HTML, but you can still look at the code that a web server sends to you. To try this out for yourself, simply go to the sample code for this chapter, at www.htmlandcssbook.com/ code/ and click on the link called "View Source." 
+Once you have opened this page, you can look for the View menu in your browser, and select the option that says Source or View source. (The title changes depending on what browser you are using.)
+You should see a new window appear, and it will contain the source code that was used to create this page.
+You can see this result in the photograph on the right. The page you see is the window at the top; the code is below.
+At first this code might look complicated but don't be discouraged. By the time you have finished the next chapter of this book, you will be able to understand it.
+All of the examples for this book are on the website, and you can use this simple technique on any of the example pages to see how they work.
+You can also download all of the code for this book from the same website by clicking on the "Download" link.
+
+Summary
+STRUCTURE
+XX HTML pages are text documents.
+XX HTML uses tags (characters that sit inside angled brackets) to give the information they surround special meaning.
+XX Tags are often referred to as elements.
+XX Tags usually come in pairs. The opening tag denotes the start of a piece of content; the closing tag denotes the end.
+XX Opening tags can carry attributes, which tell us more about the content of that element.
+XX Attributes require a name and a value.
+XX To learn HTML you need to know what tags are available for you to use, what they do, and where they can go.
+
+2
+Text
+XX Headings and paragraphs XX Bold, italic, emphasis XX Structural and semantic markup
+
+When creating a web page, you add tags (known as markup) to the contents of the page. These tags provide extra meaning and allow browsers to show users the appropriate structure for the page.
+In this chapter we focus on how to add markup to the text that appears on your pages. You will learn about: ●● Structural markup: the elements that you can use to
+describe both headings and paragraphs ●● Semantic markup: which provides extra information; such
+as where emphasis is placed in a sentence, that something you have written is a quotation (and who said it), the meaning of acronyms, and so on
+
+Headings
+<h1> <h2> <h3> <h4> <h5> <h6>
+HTML has six "levels" of headings:
+<h1> is used for main headings
+<h2> is used for subheadings
+If there are further sections under the subheadings then the <h3> element is used, and so on...
+Browsers display the contents of headings at different sizes. The contents of an <h1> element is the largest, and the contents of an <h6> element is the smallest. The exact size at which each browser shows the headings can vary slightly. Users can also adjust the size of text in their browser. You will see how to control the size of text, its color, and the fonts used when we come to look at CSS.
+chapter-02/headings.html
+<h1>This is a Main Heading</h1> <h2>This is a Level 2 Heading</h2> <h3>This is a Level 3 Heading</h3> <h4>This is a Level 4 Heading</h4> <h5>This is a Level 5 Heading</h5> <h6>This is a Level 6 Heading</h6>
+
+HTML R e s u lt
+
+ParaAgrtaipchles
+
+HTML
+
+chapter-02/paragraphs.html
+<hpt>mAl>paragraph consists of one or more sentences that form a self-contained unit of discourse. The start of a paragraph is indicated by a new line.</p>
+<p>Text is easier to understand when it is split up into units of text. For example, a book may have chapters. Chapters can have subheadings. Under each heading there will be one or more paragraphs.</p>
+<p>
+To create a paragraph, surround the words that make up the paragraph with an opening <p> tag and closing </p> tag.
+By default, a browser will show each paragraph on a new line with some space between it and any subsequent paragraphs.
+
+Bold & Italic
+<b>
+By enclosing words in the tags <b> and </b> we can make characters appear bold.
+The <b> element also represents a section of text that would be presented in a visually different way (for example key words in a paragraph) although the use of the <b> element does not imply any additional meaning.
+chapter-02/bold.html
+
+HTML
+<p>This is how we make a word appear <b>bold.</b> </p>
+<p>Inside a product description you might see some <b>key features</b> in bold.</p>
+
+R e s u lt
+<i>
+By enclosing words in the tags <i> and </i> we can make characters appear italic.
+The <i> element also represents a section of text that would be said in a different way from surrounding content — such as technical terms, names of ships, foreign words, thoughts, or other terms that would usually be italicized.
+chapter-02/italic.html
+
+HTML
+<p>This is how we make a word appear <i>italic</i>. </p>
+<p>It's a potato <i>Solanum teberosum</i>.</p> <p>Captain Cook sailed to Australia on the
+<i>Endeavour</i>.</p>
+
+SupersAcrrtipictl&e Subscript
+
+HTML
+<p>On the 4<sup>th</sup> of September you will learn about E=MC<sup>2</sup>.</p>
+<p>The amount of CO<sub>2</sub> in the atmosphere grew by 2ppm in 2009<sub>1</sub>.</p>
+
+<sup>
+The <sup> element is used to contain characters that should be superscript such as the suffixes of dates or mathematical concepts like raising a number to a power such as 22.
+<sub>
+The <sub> element is used to contain characters that should be subscript. It is commonly used with foot notes or chemical formulas such as H20.
+
+White Space
+In order to make code easier to read, web page authors often add extra spaces or start some elements on new lines.
+When the browser comes across two or more spaces next to each other, it only displays one space. Similarly if it comes across a line break, it treats that as a single space too. This is known as white space collapsing.
+You will often see that web page authors take advantage of white space collapsing to indent their code in order to make it easier to follow.
+
+
+HTML
+<p>The moon is drifting away from Earth.</p>
+<p>The moon is drifting away from Earth.</p>
+<p>The moon is drifting away from Earth.</p>
+
+
+Line BrAeratkicsl&e Horizontal Rules
+
+HTML
+<p>The Earth<br />gets one hundred tons heavier every day<br />due to falling space dust.</p>
+
+<br />
+As you have already seen, the browser will automatically show each new paragraph or heading on a new line. But if you wanted to add a line break inside the middle of a paragraph you can use the line break tag <br />.
+
+HTML
+<p>Venus is the only planet that rotates clockwise.</p>
+<hr /> <p>Jupiter is bigger than all the other planets
+combined.</p>
+
+<hr />
+To create a break between themes — such as a change of topic in a book or a new scene in a play — you can add a horizontal rule between sections using the <hr /> tag.
+There are a few elements that do not have any words between an opening and closing tag. They are known as empty elements and they are written differently.
+An empty element usually has only one tag. Before the closing angled bracket of an empty element there will often be a space and a forward slash character. Some web page authors miss this out but it is a good habit to get into.
+
+Visual Editors & Their Code views
+Content management systems and HTML editors such as Dreamweaver usually have two views of the page you are creating: a visual editor and a code view.
+Visual editors often resemble word processors. Although each editor will differ slightly, there are some features that are common to most editors that allow you to control the presentation of text.
+●● Headings are created by highlighting text then using a drop-down box to select a heading.
+●● Bold and italic text are created by highlighting some text and pressing a b or i button.
+●● New paragraphs are created using the return or the enter key.
+●● Line breaks are created by pressing the shift key and the return key at the same time.
+●● Horizontal rules are created using a button with a straight line on it.
+
+If you copy and paste text from a program that allows you to format text (such as Word) into a visual editor, it may add extra markup. To prevent this copy the text into a plain text editor first (such as Notepad on a PC or TextEdit on a Mac) and then copy it from that program and paste it into the visual editor.
+Code views show you the code created by the visual editor so you can manually edit it, or so you can just enter new code yourself. It is often activated using a button with an icon that says HTML or has angled brackets. White space may be added to the code by the editor to make the code easier to read.
+
+Semantic Markup
+There are some text elements that are not intended to affect the structure of your web pages, but they do add extra information to the pages — they are known as semantic markup.
+In the rest of the chapter you will meet some more elements that will help you when you are adding text to web pages. For example, you are going to meet the <em> element that allows you to indicate where emphasis should be placed on selected words and the <blockquote> element which indicates that a block of text is a quotation.
+Browsers often display the contents of these elements in a different way. For example, the content of the <em> element is shown in italics, and a <blockquote> is usually indented. But you should not use them to change the way that your text looks; their purpose is to describe the content of your web pages more accurately.
+The reason for using these elements is that other programs, such as screen readers or search engines, can use this extra information. For example, the voice of a screen reader may add emphasis to the words inside the <em> element, or a search engine might register that your page features a quote if you use the <blockquote> element.
+
+Strong & Emphasis
+<strong>
+The use of the <strong> element indicates that its content has strong importance. For example, the words contained in this element might be said with strong emphasis.
+By default, browsers will show the contents of a <strong> element in bold.
+
+<p><strong>Beware:</strong> Pickpockets operate in this area.</p>
+<p>This toy has many small pieces and is <strong>not suitable for children under five years old. </strong></p>
+The <em> element indicates emphasis that subtly changes the meaning of a sentence.
+By default browsers will show the contents of an <em> element in italic.
+
+QuotAarttiiocnles
+There are two elements commonly used for marking up quotations:
+<blockquote> The <blockquote> element is used for longer quotes that take up an entire paragraph. Note how the <p> element is still used inside the <blockquote> element.
+Browsers tend to indent the contents of the <blockquote> element, however you should not use this element just to indent a piece of text — rather you should achieve this effect using CSS.
+<q> The <q> element is used for shorter quotes that sit within a paragraph. Browsers are supposed to put quotes around the <q> element, however Internet Explorer does not — therefore many people avoid using the <q> element.
+Both elements may use the cite attribute to indicate where the quote is from. Its value should be a URL that will have more information about the source of the quotation.
+
+Abbreviations & Acronyms
+<abbr>
+If you use an abbreviation or an acronym, then the <abbr> element can be used. A title attribute on the opening tag is used to specify the full term.
+In HTML 4 there was a separate <acronym> element for acronyms. To spell out the full form of the acronym, the title attribute was used (as with the <abbr> element above). HTML5 just uses the <abbr> element for both abbreviations and acronyms.
+<p><abbr title="Professor">Prof</abbr> Stephen Hawking is a theoretical physicist and cosmologist.</p>
+<p><acronym title="National Aeronautics and Space Administration">NASA</acronym> do some crazy space stuff.</p>
+
+CitaAtriotnicsl&e Definitions
+<cite> When you are referencing a piece of work such as a book, film or research paper, the <cite> element can be used to indicate where the citation is from.
+In HTML5, <cite> should not really be used for a person's name — but it was allowed in HTML 4, so most people are likely to continue to use it.
+Browsers will render the content of a <cite> element in italics.
+The first time you explain some new terminology (perhaps an academic concept or some jargon) in a document, it is known as the defining instance of it.
+The <dfn> element is used to indicate the defining instance of a new term.
+Some browsers show the content of the <dfn> element in italics. Safari and Chrome do not change its appearance.
+
+Author Details
+<address> The <address> element has quite a specific use: to contain contact details for the author of the page.
+It can contain a physical address, but it does not have to. For example, it may also contain a phone number or email address.
+Browsers often display the content of the <address> element in italics.
+You may also be interested in something called the hCard microformat for adding physical address information to your markup.
+Online extra: You can find out more about hCards on the website accompanying this book.
+
+Changes to CAornttiecnlet
+<ins> <del>
+The <ins> element can be used to show content that has been inserted into a document, while the <del> element can show text that has been deleted from it.
+The content of a <ins> element is usually underlined, while the content of a <del> element usually has a line through it.
+<s>
+The <s> element indicates something that is no longer accurate or relevant (but that should not be deleted).
+Visually the content of an <s> element will usually be displayed with a line through the center.
+Older versions of HTML had a <u> element for content that was underlined, but this is being phased out.
+
+Example
+TEXT
+This is a very simple HTML page that demonstrates text markup.
+Structural markup includes elements such as <h1>, <h2>, and <p>. Semantic information is carried in elements such as <cite> and <em>.
+
+Summary
+TEXT
+XX HTML elements are used to describe the structure of the page (e.g. headings, subheadings, paragraphs).
+XX They also provide semantic information (e.g. where emphasis should be placed, the definition of any acronyms used, when given text is a quotation).
+
+3
+Lists
+XX Numbered lists XX Bullet lists XX Definition lists
+
+There are lots of occasions when we need to use lists. HTML provides us with three different types:
+●● Ordered lists are lists where each item in the list is numbered. For example, the list might be a set of steps for a recipe that must be performed in order, or a legal contract where each point needs to be identified by a section number.
+●● Unordered lists are lists that begin with a bullet point (rather than characters that indicate order).
+●● Definition lists are made up of a set of terms along with the definitions for each of those terms.
+63 LISTS
+
+Ordered Lists
+<ol>
+The ordered list is created with the <ol> element.
+<li>
+Each item in the list is placed between an opening <li> tag and a closing </li> tag. (The li stands for list item.)
+Browsers indent lists by default.
+Sometimes you may see a type attribute used with the <ol> element to specify the type of numbering (numbers, letters, roman numerals and so on). It is better to use the CSS liststyle-type property covered on pages 333-335.
+
+UnordereAdrtLiicsltes
+<ul>
+The unordered list is created with the <ul> element.
+<li>
+Each item in the list is placed between an opening <li> tag and a closing </li> tag. (The li stands for list item.)
+Browsers indent lists by default.
+Sometimes you may see a type attribute used with the <ul> element to specify the type of bullet point (circles, squares, diamonds and so on). It is better to use the CSS list-styletype property covered on pages 333-335.
+
+Definition Lists
+<dl>
+The definition list is created with the <dl> element and usually consists of a series of terms and their definitions.
+Inside the <dl> element you will usually see pairs of <dt> and <dd> elements.
+<dt>
+This is used to contain the term being defined (the definition term).
+<dd>
+This is used to contain the definition.
+Sometimes you might see a list where there are two terms used for the same definition or two different definitions for the same term.
+
+NesteAdrtLiicsltes
+You can put a second list inside an <li> element to create a sublist or nested list.
+Browsers display nested lists indented further than the parent list. In nested unordered lists, the browser will usually change the style of the bullet point too.
+
+Summary
+LISTS
+XX There are three types of HTML lists: ordered, unordered, and definition.
+XX Ordered lists use numbers. XX Unordered lists use bullets. XX Definition lists are used to define terminology. XX Lists can be nested inside one another.
+
+4
+Links
+XX Creating links between pages XX Linking to other sites XX Email links
+
+Links are the defining feature of the web because they allow you to move from one web page to another — enabling the very idea of browsing or surfing.
+You will commonly come across the following types of links: ●● Links from one website to another ●● Links from one page to another on the same website ●● Links from one part of a web page to another part of the
+same page ●● Links that open in a new browser window ●● Links that start up your email program and address a new
+email to someone
+
+Writing Links
+Links are created using the <a> element. Users can click on anything between the opening <a> tag and the closing </a> tag. You specify which page you want to link to using the href attribute.
+
+The text between the opening <a> tag and closing </a> tag is known as link text. Where possible, your link text should explain where visitors will be taken if they click on it (rather than just saying "click here"). Below you can see the link to IMDB that was created on the previous page.
+Many people navigate websites by scanning the text for links. Clear link text can help visitors find what they want. This will give them a more positive impression of your site and may encourage them to visit it for longer. (It also helps people using screen reader software.)
+To write good link text, you can think of words people might use when searching for the page that you are linking to. (For example, rather than write "places to stay" you could use something more specific such as "hotels in New York.")
+
+Linking to Other Sites
+<a> Links are created using the <a> element which has an attribute called href. The value of the href attribute is the page that you want people to go to when they click on the link.
+Users can click on anything that appears between the opening <a> tag and the closing </a> tag and will be taken to the page specified in the href attribute.
+When you link to a different website, the value of the href attribute will be the full web address for the site, which is known as an absolute URL.
+Browsers show links in blue with an underline by default.
+Absolute URLs
+URL stands for Uniform Resource Locator. Every web page has its own URL. This is the web address that you would type into a browser if you wanted to visit that specific page.
+An absolute URL starts with the domain name for that site, and can be followed by the path to a specific page. If no page is specified, the site will display the homepage.
+
+Linking to OtherArPtaigceles on the Same Site
+When you are linking to other pages within the same site, you do not need to specify the domain name in the URL. You can use a shorthand known as a relative URL.
+If all the pages of the site are in the same folder, then the value of the href attribute is just the name of the file.
+If you have different pages of a site in different folders, then you can use a slightly more complex syntax to indicate where the page is in relation to the current page. You will learn more about these on the pages 81-84.
+If you look at the download code for each chapter, you will see that the index.html file contains links that use relative URLs.
+Relative URLs
+When linking to other pages within the same site, you can use relative URLs. These are like a shorthand version of absolute URLs because you do not need to specify the domain name.
+We will take a closer look at relative URLs on pages 83-84 as there are several helpful shortcuts you can use to write links to other pages on your own website.
+Relative URLs help when building a site on your computer because you can create links between pages without having to set up your domain name or hosting.
+
+Directory Structure
+On larger websites it's a good idea to organize your code by placing the pages for each different section of the site into a new folder. Folders on a website are sometimes referred to as directories.
+Structure
+The diagram on the right shows the directory structure for a fictional entertainment listings website called ExampleArts.
+The top-level folder is known as the root folder. (In this example, the root folder is called examplearts.) The root folder contains all of the other files and folders for a website.
+Each section of the site is placed in a separate folder; this helps organize the files.
+Relationships
+The relationship between files and folders on a website is described using the same terminology as a family tree.
+In the diagram on the right, you can see some relationships have been drawn in.
+The examplearts folder is a parent of the movies, music and theater folders. And the the movies, music and theater folders are children of the examplearts folder.
+Homepages
+The main homepage of a site written in HTML (and the homepages of each section in a child folder) is called index.html.
+Web servers are usually set up to return the index.html file if no file name is specified.
+Therefore, if you enter examplearts.com it will return examplearts.com/index .html, and examplearts.com/ music will return examplearts .com/music/index.html.
+If you are working with a content management system, blogging software, or an e-commerce system, you might not have individual files for each page of the website.
+Instead, these systems often use one template file for each different type of page (such as news articles, blog posts, or products).
+Editing the template file would change all of the pages that use that template. Do not change any code that is not HTML or you may break the page.
+
+Relative URLs
+Relative URLs can be used when linking to pages within your own website. They provide a shorthand way of telling the browser where to find your files.
+When you are linking to a page on your own website, you do not need to specify the domain name. You can use relative URLs which are a shorthand way to tell the browser where a page is in relation to the current page.
+This is especially helpful when creating a new website or learning about HTML because you can create links between pages when they are only on your personal computer (before you have got a domain name and uploaded them to the web).
+Because you do not need to repeat the domain name in each link, they are also quicker to write.
+If all of the files in your site are in one folder, you simply use the file name for that page.
+If your site is organized into separate folders (or directories), you need to tell the browser how to get from the page it is currently on to the page that you are linking to.
+If you link to the same page from two different pages you might, therefore, need to write two different relative URLs.
+These links make use of the same terminology (borrowed from that of family trees) you met on the previous page which introduces directory structure.
+
+Relative Link Type
+Same Folder To link to a file in the same folder, just use the file name. (Nothing else is needed.)
+Child Folder For a child folder, use the name of the child folder, followed by a forward slash, then the file name.
+Grandchild Folder Use the name of the child folder, followed by a forward slash, then the name of the grandchild folder, followed by another forward slash, then the file name.
+Parent Folder Use ../ to indicate the folder above the current one, then follow it with the file name.
+GrandParent Folder Repeat the ../ to indicate that you want to go up two folders (rather than one), then follow it with the file name.
+When a website is live (that is, uploaded to a web server) you may see a couple of other techniques used that do not work when the files are on your local computer.
+For example, you may see the name of a child folder without the name of a file. In this case the web server will usually try to show the homepage for that section.
+A forward slash will return the homepage for the entire site, and a forward slash followed by a file name will return that file providing it is in the root directory.
+
+Email Links
+mailto:
+To create a link that starts up the user's email program and addresses an email to a specified email address, you use the <a> element. However, this time the value of the href attribute starts with mailto: and is followed by the email address you want the email to be sent to. On the right you can see that an email link looks just like any other link but, when it is clicked on, the user's email program will open a new email message and address it to the person specified in the link.
+
+Opening ALirntkiscline a New Window target
+If you want a link to open in a new window, you can use the target attribute on the opening <a> tag. The value of this attribute should be _blank.
+One of the most common reasons a web page author might want a link to be opened in a new window is if it points to another website. In such cases, they hope the user will return to the window containing their site after finishing looking at the other one.
+Generally you should avoid opening links in a new window, but if you do, it is considered good practice to inform users that the link will open a new window before they click on it.
+
+Linking to a Specific Part of the Same Page
+At the top of a long page you might want to add a list of contents that links to the corresponding sections lower down. Or you might want to add a link from part way down the page back to the top of it to save users from having to scroll back to the top.
+Before you can link to a specific part of a page, you need to identify the points in the page that the link will go to. You do this using the id attribute (which can be used on every HTML element). You can see that the <h1> and <h2> elements in this example have been given id attributes that identify those sections of the page.
+The value of the id attribute should start with a letter or an underscore (not a number or any other character) and, on a single page, no two id attributes should have the same value.
+To link to an element that uses an id attribute you use the <a> element again, but the value of the href attribute starts with the # symbol, followed by the value of the id attribute of the element you want to link to. 
+
+Linking to a SApretciciflice Part of Another Page
+If you want to link to a specific part of a different page (whether on your own site or a different website) you can use a similar technique.
+As long as the page you are linking to has id attributes that identify specific parts of the page, you can simply add the same syntax to the end of the link for that page.
+Therefore, the href attribute will contain the address for the page (either an absolute URL or a relative URL), followed by the # symbol, followed by the value of the id attribute that is used on the element you are linking to.
+For example, to link to the bottom of the homepage of the website that accompanies this book, you would write: <a href="http:/www. htmlandcssbookcom/ #bottom">
+
+LINKS 88
+
+89 LINKS
+
+Example
+LINKS
+This example is of a web page about film.
+The <h1> element is used with an id attribute at the top of the page so that a link can be added to take readers from the bottom of the page to the top. There is an email link to allow readers to contact the author of the web page. There are also a number of links to qualified URLs. These link to various film festivals. Below this list is a link to a relative URL which is an "about" page that lives in the same directory.
+
+Summary
+LINKS
+XX Links are created using the <a> element. XX The <a> element uses the href attribute to indicate
+the page you are linking to. XX If you are linking to a page within your own site, it is
+best to use relative links rather than qualified URLs. XX You can create links to open email programs with an
+email address in the "to" field. XX You can use the id attribute to target elements within
+a page that can be linked to.
+
+5
+Images
+XX How to add images to pages XX Choosing the right format XX Optimizing images for the web
+
+There are many reasons why you might want to add an image to a web page: you might want to include a logo, photograph, illustration, diagram, or chart.
+There are several things to consider when selecting and preparing images for your site, but taking time to get them right will make it look more attractive and professional. In this chapter you will learn how to: ●● Include an image in your web pages using HTML ●● Pick which image format to use ●● Show an image at the right size ●● Optimize an image for use on the web to make pages
+load faster You can also use CSS to include images in your pages using the background-image property, which you will meet on pages 413-420.
