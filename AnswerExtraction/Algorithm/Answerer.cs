@@ -1,4 +1,5 @@
-﻿using AnswerExtraction.Algorithm.DocumentParsing;
+﻿using AnswerExtraction.Algorithm.BERT;
+using AnswerExtraction.Algorithm.DocumentParsing;
 using AnswerExtraction.Algorithm.DocumentRanking;
 using AnswerExtraction.Algorithm.NLP;
 using AnswerExtraction.API;
@@ -16,41 +17,44 @@ namespace AnswerExtraction.Algorithm
     // Couldn't come up with a better name.
     public class Answerer : IAnswerer
     {
-        public Answerer(Client apiClient, IBM25 bM25, IQueryParser queryParser, IParagraphSplitter paragraphSplitter)
+        public Answerer(Client apiClient, IBM25 bM25, IQueryParser queryParser, IParagraphSplitter paragraphSplitter, IBertWrapper bertWrapper)
         {
             _apiClient = apiClient;
             _bM25 = bM25;
             _queryParser = queryParser;
             _paragraphSplitter = paragraphSplitter;
+            _bertWrapper = bertWrapper;
         }
 
         private readonly Client _apiClient;
         private readonly IBM25 _bM25;
         private readonly IQueryParser _queryParser;
         private readonly IParagraphSplitter _paragraphSplitter;
+        private readonly IBertWrapper _bertWrapper;
 
         public async Task<string> AnswerAsync(string question, string subject)
         {
-            question = AddQuestionMarkIfNotExists(question);
-            var queryParseResult = await _queryParser.ParseQueryAsync(question);
-            var fullMetadata = await _apiClient.FileAsync();
-            var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, 
-                fullMetadata.Metadata
-                    .Where(m => m.Category.Equals(subject, StringComparison.OrdinalIgnoreCase)));
+            var answ = await _bertWrapper.GetAnswerAsync(question, subject, true /* DEBUG ONLY - SET TO TRUE IN RELEASE */);
+            //question = AddQuestionMarkIfNotExists(question);
+            //var queryParseResult = await _queryParser.ParseQueryAsync(question);
+            //var fullMetadata = await _apiClient.FileAsync();
+            //var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens, 
+            //    fullMetadata.Metadata
+            //        .Where(m => m.Category.Equals(subject, StringComparison.OrdinalIgnoreCase)));
 
-            string bestDoc;
-            if (bestMatchedDocFromTag != null)
-            {
-                var bestDocUrl = bestMatchedDocFromTag.FilePath;
-                bestDoc = await _apiClient.LoadDocIntoMemoryAsync(bestDocUrl);
-            }
-            else
-            {
-                bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata, subject);
-            }
+            //string bestDoc;
+            //if (bestMatchedDocFromTag != null)
+            //{
+            //    var bestDocUrl = bestMatchedDocFromTag.FilePath;
+            //    bestDoc = await _apiClient.LoadDocIntoMemoryAsync(bestDocUrl);
+            //}
+            //else
+            //{
+            //    bestDoc = await GetBestDocBasedOnBm25Score(queryParseResult.BM25Tokens, fullMetadata, subject);
+            //}
 
-            var passages = _paragraphSplitter.SplitIntoParagraphs(bestDoc);
-            return "abc";
+            //var passages = _paragraphSplitter.SplitIntoParagraphs(bestDoc);
+            return answ;
         }
 
         private async Task<string> GetBestDocBasedOnBm25Score(string[] keywords, FileMetadataFullResponseDTO fileMetadata, string subject)

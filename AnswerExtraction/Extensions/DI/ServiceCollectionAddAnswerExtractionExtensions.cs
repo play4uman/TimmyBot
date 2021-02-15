@@ -1,4 +1,5 @@
 ﻿using AnswerExtraction.Algorithm;
+using AnswerExtraction.Algorithm.BERT;
 using AnswerExtraction.Algorithm.DocumentParsing;
 using AnswerExtraction.Algorithm.DocumentRanking;
 using AnswerExtraction.Algorithm.NLP;
@@ -24,8 +25,16 @@ namespace AnswerExtraction.Extensions.DI
                 .AddTransient<IAnswerer, Answerer>()
                 .AddTransient(sc => new Client(apiUrl, sc.GetRequiredService<HttpClient>()))
                 .AddTransient<IExecutor, Executor>()
-                .AddTransient<IParagraphSplitter, ParagraphSplitter>();
+                .AddTransient<IParagraphSplitter, ParagraphSplitter>()
+                .AddSingleton<IBertWrapper>(InitBertWrapper());
             return services;
+        }
+
+        private static BertWrapper InitBertWrapper()
+        {
+            var bertProcess = new BertWrapper();
+            bertProcess.InitializeAsync().Wait();
+            return bertProcess;
         }
     }
 }

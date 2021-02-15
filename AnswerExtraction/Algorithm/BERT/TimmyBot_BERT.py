@@ -4,12 +4,13 @@ from transformers import BertTokenizer
 
 # main.py
 import sys
-
 #Model
 model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
 
 #Tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+
+print("READY", flush=True)
 
 def get_answer(question, paragraph):
     encoding = tokenizer.encode_plus(text=question,text_pair=paragraph, add_special_tokens=True)
@@ -34,7 +35,7 @@ def get_answer(question, paragraph):
             corrected_answer += word[2:]
         else:
             corrected_answer += ' ' + word
-    print(f"ANSWER: {corrected_answer}")
+    print(f"ANSWER: {corrected_answer}", flush=True)
 
 def exit_command(firstIn, secondIn):
     return (firstIn =='exit') and (secondIn == 'exit')
