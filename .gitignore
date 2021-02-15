@@ -15,7 +15,6 @@ customdeploy/code.zip
 /AnswerExtraction/obj
 /Files/bin/Debug/net5.0
 /Files/obj
-/Files/wwwroot/Documents/ComputerScience
 /Files/TestFiles
 /Shared/bin/Debug/netcoreapp3.1
 /Shared/obj
@@ -39,4 +38,3 @@ customdeploy/code.zip
 # Maven
 log/
 target/
-/Files/wwwroot/Documents/Psychology
