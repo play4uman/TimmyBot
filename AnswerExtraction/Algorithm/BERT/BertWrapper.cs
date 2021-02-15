@@ -36,18 +36,17 @@ namespace AnswerExtraction.Algorithm.BERT
             _bertProcessHandle.BeginErrorReadLine();
             _processInput = _bertProcessHandle.StandardInput;
 
-            bool dataReceived = false;
             _bertProcessHandle.ErrorDataReceived += (s, ea) => throw new ApplicationException($"BERT script ecountered an error: {ea.Data}");
+            var tcs = new TaskCompletionSource();
             DataReceivedEventHandler onReadyReceived = (s, ea) =>
             {
                 if (ea.Data == "READY")
-                    dataReceived = true;
+                { 
+                    tcs.SetResult();
+                }
             };
             _bertProcessHandle.OutputDataReceived += onReadyReceived;
-
-            while (!dataReceived)
-                await Task.Delay(100);
-
+            await tcs.Task;
             _bertProcessHandle.OutputDataReceived -= onReadyReceived;
         }
 
@@ -61,23 +60,18 @@ namespace AnswerExtraction.Algorithm.BERT
                     "Eventually, the so-called Methodists started individual societies or classes for members of the Church of England who wanted to live a more religious life.";
             }
 
-
-            string answer = null;
-            bool dataReceived = false;
+            var tcs = new TaskCompletionSource<string>();
             _bertProcessHandle.OutputDataReceived += (s, ea) =>
             {
-                answer = ea.Data.Split("ANSWER: ")[1];
-                dataReceived = true;
+                var answer = ea.Data.Split("ANSWER: ")[1];
+                tcs.SetResult(answer);
             };
 
             _processInput.WriteLine(question);
             _processInput.WriteLine(paragraph);
             _processInput.Flush();
 
-
-            while (!dataReceived)
-                await Task.Delay(25);
-            return answer;
+            return await tcs.Task;
         }
 
         public void Dispose()
