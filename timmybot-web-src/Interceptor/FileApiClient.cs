@@ -14,7 +14,7 @@ using Shared.DTO.Response;
 #pragma warning disable 1591 // Disable "CS1591 Missing XML comment for publicly visible type or member ..."
 #pragma warning disable 8073 // Disable "CS8073 The result of the expression is always 'false' since a value of type 'T' is never equal to 'null' of type 'T?'"
 
-namespace AnswerExtraction.API
+namespace QnABot.Interceptor
 {
     using System = global::System;
     
@@ -288,7 +288,7 @@ namespace AnswerExtraction.API
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> QuestionAsync(string q, string subject)
+        public System.Threading.Tasks.Task<QuestionResponseDTO> QuestionAsync(string q, string subject)
         {
             return QuestionAsync(q, subject, System.Threading.CancellationToken.None);
         }
@@ -296,7 +296,7 @@ namespace AnswerExtraction.API
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> QuestionAsync(string q, string subject, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<QuestionResponseDTO> QuestionAsync(string q, string subject, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/Question?");
@@ -342,7 +342,7 @@ namespace AnswerExtraction.API
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<string>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<QuestionResponseDTO>(response_, headers_).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

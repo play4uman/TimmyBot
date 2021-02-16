@@ -1,5 +1,6 @@
 ﻿using AnswerExtraction.Algorithm;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DTO.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,10 @@ namespace Files.Controllers
 
         private readonly IAnswerer _answerer;
         [HttpGet]
-        public async Task<string> GetAnswer(string q, string subject)
+        public async Task<QuestionResponseDTO> GetAnswer(string q, string subject)
         {
-            return await _answerer.AnswerAsync(q, subject);
+            var answer = await _answerer.AnswerAsync(q, subject);
+            return new QuestionResponseDTO { Answer = answer };
         }
     }
 }
