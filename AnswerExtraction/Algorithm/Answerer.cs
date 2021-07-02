@@ -3,6 +3,7 @@ using AnswerExtraction.Algorithm.DocumentParsing;
 using AnswerExtraction.Algorithm.DocumentRanking;
 using AnswerExtraction.Algorithm.NLP;
 using AnswerExtraction.API;
+using AnswerExtraction.Extensions.Enumerable;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.DTO.Request;
 using Shared.DTO.Response;
@@ -39,7 +40,7 @@ namespace AnswerExtraction.Algorithm
             var fullMetadata = await _apiClient.FileAsync();
             var bestMatchedDocFromTag = Tags.BestMatch(queryParseResult.BM25Tokens,
                 fullMetadata.Metadata
-                    .Where(m => m.Category.Equals(subject, StringComparison.OrdinalIgnoreCase)));
+                    .GetMetadataBasedOnSubject(subject));
 
             string bestDoc;
             if (bestMatchedDocFromTag != null)
@@ -64,7 +65,7 @@ namespace AnswerExtraction.Algorithm
         {
             // Load all documents into memory and associate them with the number of words they have.
             var docPairs = await Task.WhenAll(fileMetadata.Metadata
-                                        .Where(fm => fm.Category.Equals(subject, StringComparison.OrdinalIgnoreCase))
+                                        .GetMetadataBasedOnSubject(subject)
                                         .Select(async fm =>
                                         {
                                             var doc = await _apiClient.LoadDocIntoMemoryAsync(fm.FilePath);

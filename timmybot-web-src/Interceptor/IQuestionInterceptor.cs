@@ -9,10 +9,10 @@ namespace QnABot.Interceptor
     {
         Found,
         Added,
-        NotFound
+        NotFoundAndNotAdded
     }
     public interface IQuestionInterceptor
     {
-        Task<ResponseStatus> InterceptQueryAsync(string query);
+        Task<ResponseStatus> InterceptQueryAsync(string question, string subject);
     }
 }

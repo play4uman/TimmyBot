@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
@@ -34,13 +35,19 @@ namespace Microsoft.BotBuilderSamples
         public async Task PostAsync()
         {
             using var sr = new StreamReader(Request.Body);
-            var bodyText = sr.ReadToEnd();
-            byte[] requestData = Encoding.UTF8.GetBytes(bodyText);
+            var bodyText = await sr.ReadToEndAsync();
 
             dynamic bodyObj = JsonConvert.DeserializeObject(bodyText);
+            byte[] requestData = Encoding.UTF8.GetBytes(bodyText); // og request data
+
             if ((string)bodyObj.type == "message")
             {
-                var result = await _questionInterceptor.InterceptQueryAsync((string)bodyObj.text);
+                var fullQuery = (string)bodyObj.text;
+                var (subject, question) = ParseQueryIntoQuestionAndSubject(fullQuery);
+                var result = await _questionInterceptor.InterceptQueryAsync(question, subject);
+                bodyObj.text = question;
+                var newSerializedBody = JsonConvert.SerializeObject(bodyObj);
+                requestData = Encoding.UTF8.GetBytes(newSerializedBody);
             }
 
             Request.Body = new MemoryStream(requestData);
@@ -48,6 +55,22 @@ namespace Microsoft.BotBuilderSamples
             // Delegate the processing of the HTTP POST to the adapter.
             // The adapter will invoke the bot.
             await _adapter.ProcessAsync(Request, Response, _bot);
+        }
+
+        private (string subject, string question) ParseQueryIntoQuestionAndSubject(string query)
+        {
+            // We can invoke a subject with "Subject: computer science; What is computer science?"
+            var regexWithSubject = new Regex("subject:(.*);(.*)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var subjectMatch = regexWithSubject.Match(query);
+            string subject = null;
+            string question = query.Trim();
+            if (subjectMatch.Success)
+            {
+                subject = subjectMatch.Groups[1].Value.Replace(" ", "").Trim();
+                question = subjectMatch.Groups[2].Value.Trim();
+            }
+
+            return (subject, question);
         }
     }
 }
